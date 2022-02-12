@@ -15,12 +15,12 @@ class CreateKaryawansTable extends Migration
     {
         Schema::create('karyawans', function (Blueprint $table) {
             $table->id();
-            $table->integer('nik')->nullable();
+            $table->string('nik', 12)->nullable();
             $table->string('nama_lengkap', 30)->nullable();
             $table->string('nama_panggilan', 15)->nullable();
             $table->string('telepon', 15)->nullable();
             $table->string('email', 50)->nullable();
-            $table->integer('nomor_ktp')->nullable();
+            $table->string('nomor_ktp', 16)->nullable();
             $table->string('status_ktp', 30)->nullable();
             $table->string('tempat_lahir', 30)->nullable();
             $table->date('tanggal_lahir')->nullable();
@@ -28,8 +28,8 @@ class CreateKaryawansTable extends Migration
             $table->char('gender', 1)->nullable();
             $table->text('alamat_asal')->nullable();
             $table->text('alamat_domisili')->nullable();
-            $table->char('jenis_sim', 1)->nullable();
-            $table->integer('nomor_sim')->nullable();
+            $table->string('jenis_sim', 10)->nullable();
+            $table->string('nomor_sim', 15)->nullable();
             $table->integer('cabang_id')->nullable();
             $table->integer('jabatan_id')->nullable();
             $table->date('tanggal_masuk')->nullable();
@@ -37,7 +37,7 @@ class CreateKaryawansTable extends Migration
             $table->text('alasan_keluar')->nullable();
             $table->integer('total_cuti')->nullable();
             $table->string('foto', 100)->nullable();
-            $table->enum('status_keryawan', ['aktif', 'nonaktif']);
+            $table->enum('status_karyawan', ['aktif', 'nonaktif']);
             $table->timestamps();
         });
     }

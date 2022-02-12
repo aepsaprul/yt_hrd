@@ -241,6 +241,10 @@
             $('.modal-create').modal('show');
         });
 
+        $(document).on('shown.bs.modal', '.modal-create', function() {
+            $('#create_nama').focus();
+        });
+
         $('#form-create').submit(function (e) {
             e.preventDefault();
 

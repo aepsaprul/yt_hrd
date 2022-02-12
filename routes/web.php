@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CabangController;
+use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KaryawanController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
 
     // karyawan
     Route::get('karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
+    Route::get('karyawan/create', [KaryawanController::class, 'create'])->name('karyawan.create');
     Route::post('karyawan/store', [KaryawanController::class, 'store'])->name('karyawan.store');
     Route::get('karyawan/{id}/edit', [KaryawanController::class, 'edit'])->name('karyawan.edit');
     Route::put('karyawan/{id}/update', [KaryawanController::class, 'update'])->name('karyawan.update');
