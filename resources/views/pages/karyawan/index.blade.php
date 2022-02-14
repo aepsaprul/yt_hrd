@@ -58,7 +58,7 @@
                                     @foreach ($karyawans as $key => $item)
                                         <tr>
                                             <td class="text-center">{{ $key + 1 }}</td>
-                                            <td>{{ $item->nama }}</td>
+                                            <td>{{ $item->nama_lengkap }}</td>
                                             <td>{{ $item->foto }}</td>
                                             <td class="text-center">
                                                 <div class="btn-group">
@@ -123,20 +123,23 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="foto">Foto</label>
-                                        <input type="file" id="foto" name="foto" class="form-control form-control-sm" required>
-                                        <small id="fotoHelp" class="form-text text-danger">Errors</small>
+                                        <input type="file" id="foto" name="foto" class="form-control form-control-sm" >
+                                        <small id="errorFoto" class="form-text text-danger"></small>
                                     </div>
                                     <div class="form-group">
                                         <label for="nik">NIK</label>
-                                        <input type="text" id="nik" name="nik" class="form-control form-control-sm" required>
+                                        <input type="text" id="nik" name="nik" class="form-control form-control-sm" value="{{ date('ymdhis') }}" maxlength="12" >
+                                        <small id="errorNik" class="form-text text-danger"></small>
                                     </div>
                                     <div class="form-group">
                                         <label for="telepon">Telepon</label>
-                                        <input type="text" id="telepon" name="telepon" class="form-control form-control-sm" required>
+                                        <input type="text" id="telepon" name="telepon" class="form-control form-control-sm" maxlength="15" >
+                                        <small id="errorTelepon" class="form-text text-danger"></small>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="email" id="email" name="email" class="form-control form-control-sm" required>
+                                        <input type="email" id="email" name="email" class="form-control form-control-sm" maxlength="50" >
+                                        <small id="errorEmail" class="form-text text-danger"></small>
                                     </div>
                                 </div>
                             </div>
@@ -148,37 +151,43 @@
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
                                                 <label for="nama_lengkap">Nama Lengkap</label>
-                                                <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-control form-control-sm" required>
+                                                <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-control form-control-sm" maxlength="30" >
+                                                <small id="errorNamaLengkap" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
                                                 <label for="nama_panggilan">Nama Panggilan</label>
-                                                <input type="text" id="nama_panggilan" name="nama_panggilan" class="form-control form-control-sm" required>
+                                                <input type="text" id="nama_panggilan" name="nama_panggilan" class="form-control form-control-sm" maxlength="15" >
+                                                <small id="errorNamaPanggilan" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
                                                 <label for="nomor_ktp">Nomor KTP</label>
-                                                <input type="text" id="nomor_ktp" name="nomor_ktp" class="form-control form-control-sm" required>
+                                                <input type="number" id="nomor_ktp" name="nomor_ktp" class="form-control form-control-sm" maxlength="16" >
+                                                <small id="errorNomorKtp" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
                                                 <label for="status_ktp">Status KTP</label>
-                                                <input type="text" id="status_ktp" name="status_ktp" class="form-control form-control-sm" required>
+                                                <input type="text" id="status_ktp" name="status_ktp" class="form-control form-control-sm" maxlength="30" >
+                                                <small id="errorStatusKtp" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
                                                 <label for="tempat_lahir">Tempat Lahir</label>
-                                                <input type="text" id="tempat_lahir" name="tempat_lahir" class="form-control form-control-sm" required>
+                                                <input type="text" id="tempat_lahir" name="tempat_lahir" class="form-control form-control-sm" maxlength="30" >
+                                                <small id="errorTempatLahir" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
                                                 <label for="tanggal_lahir">Tanggal Lahir</label>
-                                                <input type="date" id="tanggal_lahir" name="tanggal_lahir" class="form-control form-control-sm" required>
+                                                <input type="date" id="tanggal_lahir" name="tanggal_lahir" class="form-control form-control-sm" >
+                                                <small id="errorTanggalLahir" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -206,13 +215,15 @@
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
                                                 <label for="alamat_asal">Alamat Asal</label>
-                                                <input type="text" id="alamat_asal" name="alamat_asal" class="form-control form-control-sm" required>
+                                                <input type="text" id="alamat_asal" name="alamat_asal" class="form-control form-control-sm" >
+                                                <small id="errorAlamatAsal" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
                                                 <label for="alamat_domisili">Alamat Domisili</label>
-                                                <input type="text" id="alamat_domisili" name="alamat_domisili" class="form-control form-control-sm" required>
+                                                <input type="text" id="alamat_domisili" name="alamat_domisili" class="form-control form-control-sm" >
+                                                <small id="errorAlamatDomisili" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -220,10 +231,12 @@
                                                 <label for="sim">Jenis & Nomor SIM</label>
                                                 <div class="row">
                                                     <div class="col-md-4 col-sm-4 col-4">
-                                                        <input type="text" id="alamat_asal" name="alamat_asal" class="form-control form-control-sm" required>
+                                                        <input type="text" id="jenis_sim" name="jenis_sim" class="form-control form-control-sm" maxlength="10" >
+                                                        <small id="errorJenisSim" class="form-text text-danger"></small>
                                                     </div>
                                                     <div class="col-md-8 col-sm-8 col-8">
-                                                        <input type="text" id="alamat_asal" name="alamat_asal" class="form-control form-control-sm" required>
+                                                        <input type="text" id="nomor_sim" name="nomor_sim" class="form-control form-control-sm" maxlength="15" >
+                                                        <small id="errorNomorSim" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -234,6 +247,7 @@
                                                 <select name="cabang_id" id="cabang_id" class="form-control form-control-sm">
 
                                                 </select>
+                                                <small id="errorCabangId" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -242,12 +256,14 @@
                                                 <select name="jabatan_id" id="jabatan_id" class="form-control form-control-sm">
 
                                                 </select>
+                                                <small id="errorJabatanId" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
                                                 <label for="tanggal_masuk">Tanggal Masuk</label>
-                                                <input type="date" id="tanggal_masuk" name="tanggal_masuk" class="form-control form-control-sm" required>
+                                                <input type="date" id="tanggal_masuk" name="tanggal_masuk" class="form-control form-control-sm" >
+                                                <small id="errorTanggalMasuk" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                     </div>
@@ -257,10 +273,14 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="width: 120px;">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="width: 130px;">
                         <i class="fas fa-times"></i> Tutup
                     </button>
-                    <button type="submit" class="btn btn-primary" style="width: 120px;">
+                    <button class="btn btn-primary btn-spinner d-none" disabled style="width: 130px;">
+                        <span class="spinner-grow spinner-grow-sm"></span>
+                        Loading...
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-save" style="width: 130px;">
                         <i class="fas fa-save"></i> Simpan
                     </button>
                 </div>
@@ -322,10 +342,17 @@
             }
         });
 
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
         $('#btn-create').on('click', function() {
             $.ajax({
-                type: "GET",
                 url: '{{ URL::route('karyawan.create') }}',
+                type: "GET",
                 success: function (response) {
                     var value_jabatan = "<option value=\"\">--Pilih Jabatan--</option>";
                     $.each(response.jabatans, function (index, value) {
@@ -351,6 +378,26 @@
         $(document).on('submit', '#formKaryawan', function (e) {
             e.preventDefault();
 
+            $('#errorNik').empty();
+            $('#errorTelepon').empty();
+            $('#errorEmail').empty();
+            $('#errorNamaLengkap').empty();
+            $('#errorNamaPanggilan').empty();
+            $('#errorNomorKtp').empty();
+            $('#errorStatusKtp').empty();
+            $('#errorTempatLahir').empty();
+            $('#errorTanggalLahir').empty();
+            $('#errorAgama').empty();
+            $('#errorGender').empty();
+            $('#errorAlamatAsal').empty();
+            $('#errorAlamatDomisili').empty();
+            $('#errorJenisSim').empty();
+            $('#errorNomorSim').empty();
+            $('#errorCabangId').empty();
+            $('#errorJabatanId').empty();
+            $('#errorTanggalMasuk').empty();
+            $('#errorFoto').empty();
+
             let formData = new FormData($('#formKaryawan')[0]);
 
             $.ajax({
@@ -359,8 +406,49 @@
                 data: formData,
                 contentType: false,
                 processData: false,
+                beforeSend: function () {
+                    $('.btn-spinner').removeClass('d-none');
+                    $('.btn-save').addClass('d-none');
+                },
                 success: function (response) {
-                    console.log(response.errors.agama);
+                    if (response.status == 400) {
+                        $('#errorNik').append(response.errors.nik);
+                        $('#errorTelepon').append(response.errors.telepon);
+                        $('#errorEmail').append(response.errors.email);
+                        $('#errorNamaLengkap').append(response.errors.nama_lengkap);
+                        $('#errorNamaPanggilan').append(response.errors.nama_panggilan);
+                        $('#errorNomorKtp').append(response.errors.nomor_ktp);
+                        $('#errorStatusKtp').append(response.errors.status_ktp);
+                        $('#errorTempatLahir').append(response.errors.tempat_lahir);
+                        $('#errorTanggalLahir').append(response.errors.tanggal_lahir);
+                        $('#errorAgama').append(response.errors.agama);
+                        $('#errorGender').append(response.errors.gender);
+                        $('#errorAlamatAsal').append(response.errors.alamat_asal);
+                        $('#errorAlamatDomisili').append(response.errors.alamat_domisili);
+                        $('#errorJenisSim').append(response.errors.jenis_sim);
+                        $('#errorNomorSim').append(response.errors.nomor_sim);
+                        $('#errorCabangId').append(response.errors.cabang_id);
+                        $('#errorJabatanId').append(response.errors.jabatan_id);
+                        $('#errorTanggalMasuk').append(response.errors.tanggal_masuk);
+                        $('#errorFoto').append(response.errors.foto);
+                    } else {
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Data behasil ditambah'
+                        });
+
+                        setTimeout(() => {
+                            window.location.reload(1);
+                        }, 1000);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    var errorMessage = xhr.status + ': ' + statusText
+
+                    Toast.fire({
+                        icon: 'danger',
+                        title: 'Error - ' + errorMessage
+                    });
                 }
             });
         });

@@ -32,12 +32,12 @@ class KaryawanController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nik' => 'required|numeric',
+            'nik' => 'required|unique:karyawans|numeric',
             'nama_lengkap' => 'required|max:30',
             'nama_panggilan' => 'required|max:15',
-            'telepon' => 'required|max:15',
-            'email' => 'required|email|max:50',
-            'nomor_ktp' => 'required|numeric|max:16',
+            'telepon' => 'required|unique:karyawans|max:15',
+            'email' => 'required|email|unique:karyawans|max:50',
+            'nomor_ktp' => 'required|unique:karyawans|max:16',
             'status_ktp' => 'required|max:30',
             'tempat_lahir' => 'required|max:30',
             'tanggal_lahir' => 'required|date',
@@ -45,7 +45,7 @@ class KaryawanController extends Controller
             'gender' => 'required|max:1',
             'alamat_asal' => 'required',
             'alamat_domisili' => 'required',
-            'nomor_sim' => 'max:15',
+            'nomor_sim' => 'unique:karyawans|max:15',
             'cabang_id' => 'required',
             'jabatan_id' => 'required',
             'tanggal_masuk' => 'required|date',
