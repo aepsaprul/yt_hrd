@@ -148,6 +148,12 @@
 					</a>
                 </li>
                 <li class="nav-item">
+					<a href="{{ route('divisi.index') }}" class="nav-link">
+						<i class="nav-icon fas fa-user-friends"></i>
+						<p>Divisi</p>
+					</a>
+                </li>
+                <li class="nav-item">
 					<a href="{{ route('jabatan.index') }}" class="nav-link">
 						<i class="nav-icon fas fa-id-card"></i>
 						<p>Jabatan</p>
