@@ -31,6 +31,7 @@ class CreateKaryawansTable extends Migration
             $table->string('jenis_sim', 10)->nullable();
             $table->string('nomor_sim', 15)->nullable();
             $table->integer('cabang_id')->nullable();
+            $table->integer('divisi_id')->nullable();
             $table->integer('jabatan_id')->nullable();
             $table->date('tanggal_masuk')->nullable();
             $table->date('tanggal_keluar')->nullable();

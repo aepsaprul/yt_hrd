@@ -171,6 +171,15 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
+                                                <label for="create_gender">Gender</label>
+                                                <select name="gender" id="create_gender" class="form-control form-control-sm">
+                                                    <option value="l">L (Laki - laki)</option>
+                                                    <option value="p">P (Perempuan)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <div class="form-group">
                                                 <label for="create_nomor_ktp">Nomor KTP</label>
                                                 <input type="number" id="create_nomor_ktp" name="nomor_ktp" class="form-control form-control-sm" maxlength="16" >
                                                 <small id="errorNomorKtp" class="form-text text-danger"></small>
@@ -181,6 +190,19 @@
                                                 <label for="create_status_ktp">Status KTP</label>
                                                 <input type="text" id="create_status_ktp" name="status_ktp" class="form-control form-control-sm" maxlength="30" >
                                                 <small id="errorStatusKtp" class="form-text text-danger"></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label for="create_agama">Agama</label>
+                                                <select name="agama" id="create_agama" class="form-control form-control-sm">
+                                                    <option value="islam">Islam</option>
+                                                    <option value="kristen_protestan">Kristen Protestan</option>
+                                                    <option value="katholik">Katholik</option>
+                                                    <option value="hindu">Hindu</option>
+                                                    <option value="budha">Budha</option>
+                                                    <option value="kong_hu_cu">Kong Hu Cu</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -199,24 +221,17 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="create_agama">Agama</label>
-                                                <select name="agama" id="create_agama" class="form-control form-control-sm">
-                                                    <option value="islam">Islam</option>
-                                                    <option value="kristen_protestan">Kristen Protestan</option>
-                                                    <option value="katholik">Katholik</option>
-                                                    <option value="hindu">Hindu</option>
-                                                    <option value="budha">Budha</option>
-                                                    <option value="kong_hu_cu">Kong Hu Cu</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="create_gender">Gender</label>
-                                                <select name="gender" id="create_gender" class="form-control form-control-sm">
-                                                    <option value="l">L (Laki - laki)</option>
-                                                    <option value="p">P (Perempuan)</option>
-                                                </select>
+                                                <label for="sim">Jenis & Nomor SIM</label>
+                                                <div class="row">
+                                                    <div class="col-md-4 col-sm-4 col-4">
+                                                        <input type="text" id="create_jenis_sim" name="jenis_sim" class="form-control form-control-sm" maxlength="10">
+                                                        <small id="errorJenisSim" class="form-text text-danger"></small>
+                                                    </div>
+                                                    <div class="col-md-8 col-sm-8 col-8">
+                                                        <input type="text" id="create_nomor_sim" name="nomor_sim" class="form-control form-control-sm" maxlength="15">
+                                                        <small id="errorNomorSim" class="form-text text-danger"></small>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -235,17 +250,9 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="sim">Jenis & Nomor SIM</label>
-                                                <div class="row">
-                                                    <div class="col-md-4 col-sm-4 col-4">
-                                                        <input type="text" id="create_jenis_sim" name="jenis_sim" class="form-control form-control-sm" maxlength="10">
-                                                        <small id="errorJenisSim" class="form-text text-danger"></small>
-                                                    </div>
-                                                    <div class="col-md-8 col-sm-8 col-8">
-                                                        <input type="text" id="create_nomor_sim" name="nomor_sim" class="form-control form-control-sm" maxlength="15">
-                                                        <small id="errorNomorSim" class="form-text text-danger"></small>
-                                                    </div>
-                                                </div>
+                                                <label for="create_tanggal_masuk">Tanggal Masuk</label>
+                                                <input type="date" id="create_tanggal_masuk" name="tanggal_masuk" class="form-control form-control-sm" >
+                                                <small id="errorTanggalMasuk" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -268,9 +275,11 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="create_tanggal_masuk">Tanggal Masuk</label>
-                                                <input type="date" id="create_tanggal_masuk" name="tanggal_masuk" class="form-control form-control-sm" >
-                                                <small id="errorTanggalMasuk" class="form-text text-danger"></small>
+                                                <label for="create_divisi_id">Divisi</label>
+                                                <select name="divisi_id" id="create_divisi_id" class="form-control form-control-sm" >
+
+                                                </select>
+                                                <small id="errorDivisiId" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                     </div>
@@ -359,6 +368,14 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
+                                                <label for="edit_gender">Gender</label>
+                                                <select name="gender" id="edit_gender" class="form-control form-control-sm">
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <div class="form-group">
                                                 <label for="edit_nomor_ktp">Nomor KTP</label>
                                                 <input type="number" id="edit_nomor_ktp" name="nomor_ktp" class="form-control form-control-sm" maxlength="16" >
                                                 <small id="errorNomorKtp" class="form-text text-danger"></small>
@@ -369,6 +386,14 @@
                                                 <label for="edit_status_ktp">Status KTP</label>
                                                 <input type="text" id="edit_status_ktp" name="status_ktp" class="form-control form-control-sm" maxlength="30" >
                                                 <small id="errorStatusKtp" class="form-text text-danger"></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label for="edit_agama">Agama</label>
+                                                <select name="agama" id="edit_agama" class="form-control form-control-sm">
+
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -387,32 +412,9 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="edit_agama">Agama</label>
-                                                <select name="agama" id="edit_agama" class="form-control form-control-sm">
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="edit_gender">Gender</label>
-                                                <select name="gender" id="edit_gender" class="form-control form-control-sm">
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
                                                 <label for="edit_alamat_asal">Alamat Asal</label>
                                                 <input type="text" id="edit_alamat_asal" name="alamat_asal" class="form-control form-control-sm" >
                                                 <small id="errorAlamatAsal" class="form-text text-danger"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="edit_alamat_domisili">Alamat Domisili</label>
-                                                <input type="text" id="edit_alamat_domisili" name="alamat_domisili" class="form-control form-control-sm" >
-                                                <small id="errorAlamatDomisili" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -428,6 +430,20 @@
                                                         <small id="errorNomorSim" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label for="edit_alamat_domisili">Alamat Domisili</label>
+                                                <input type="text" id="edit_alamat_domisili" name="alamat_domisili" class="form-control form-control-sm" >
+                                                <small id="errorAlamatDomisili" class="form-text text-danger"></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label for="edit_tanggal_masuk">Tanggal Masuk</label>
+                                                <input type="date" id="edit_tanggal_masuk" name="tanggal_masuk" class="form-control form-control-sm" >
+                                                <small id="errorTanggalMasuk" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -450,9 +466,11 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="edit_tanggal_masuk">Tanggal Masuk</label>
-                                                <input type="date" id="edit_tanggal_masuk" name="tanggal_masuk" class="form-control form-control-sm" >
-                                                <small id="errorTanggalMasuk" class="form-text text-danger"></small>
+                                                <label for="edit_divisi_id">Divisi</label>
+                                                <select name="divisi_id" id="edit_divisi_id" class="form-control form-control-sm" >
+
+                                                </select>
+                                                <small id="errorDivisiId" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                     </div>
@@ -489,7 +507,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button class="btn btn-danger" type="button" data-dismiss="modal" style="width: 130px;"><span aria-hidden="true">Tidak</span></button>
-                    <button class="btn btn-primary btn-delete-spinner" disabled style="width: 130px; display: none;">
+                    <button class="btn btn-primary btn-delete-spinner d-none" disabled style="width: 130px;">
                         <span class="spinner-grow spinner-grow-sm"></span>
                         Loading...
                     </button>
@@ -635,6 +653,12 @@
                     });
                     $('#create_cabang_id').append(value_cabang);
 
+                    var value_divisi = "<option value=\"\">--Pilih Divisi--</option>";
+                    $.each(response.divisis, function (index, value) {
+                         value_divisi += "<option value=\"" + value.id + "\">" + value.nama + "</option>";
+                    });
+                    $('#create_divisi_id').append(value_divisi);
+
                     $('.modal-create').modal('show');
                 }
             });
@@ -664,6 +688,7 @@
             $('#errorNomorSim').empty();
             $('#errorCabangId').empty();
             $('#errorJabatanId').empty();
+            $('#errorDivisiId').empty();
             $('#errorTanggalMasuk').empty();
             $('#errorFoto').empty();
 
@@ -698,6 +723,7 @@
                         $('#errorNomorSim').append(response.errors.nomor_sim);
                         $('#errorCabangId').append(response.errors.cabang_id);
                         $('#errorJabatanId').append(response.errors.jabatan_id);
+                        $('#errorDivisiId').append(response.errors.divisi_id);
                         $('#errorTanggalMasuk').append(response.errors.tanggal_masuk);
                         $('#errorFoto').append(response.errors.foto);
 
@@ -773,15 +799,21 @@
 
                     let value_cabang = "";
                     $.each(response.cabangs, function (index, value) {
-                         value_cabang += "<option value=\"" + value.id + "\""; if (response.cabang == "islam") { value_cabang += " selected"; } value_cabang += ">" + value.nama + "</option>";
+                         value_cabang += "<option value=\"" + value.id + "\""; if (value.id == response.cabang_id) { value_cabang += " selected"; } value_cabang += ">" + value.nama + "</option>";
                     });
                     $('#edit_cabang_id').append(value_cabang);
 
                     let value_jabatan = "";
                     $.each(response.jabatans, function (index, value) {
-                         value_jabatan += "<option value=\"" + value.id + "\""; if (response.jabatan == "islam") { value_jabatan += " selected"; } value_jabatan += ">" + value.nama + "</option>";
+                         value_jabatan += "<option value=\"" + value.id + "\""; if (value.id == response.jabatan_id) { value_jabatan += " selected"; } value_jabatan += ">" + value.nama + "</option>";
                     });
                     $('#edit_jabatan_id').append(value_jabatan);
+
+                    let value_divisi = "";
+                    $.each(response.divisis, function (index, value) {
+                         value_divisi += "<option value=\"" + value.id + "\""; if (value.id == response.divisi_id) { value_divisi += " selected"; } value_divisi += ">" + value.nama + "</option>";
+                    });
+                    $('#edit_divisi_id').append(value_divisi);
 
                     // $('.edit_profile_img img').prop('src', 'http://localhost/yt_master/yt_hrd/public/image/' + response.foto);
                     $('.edit_profile_img img').prop('src', '{{ URL::to('') }}' + '/image/' + response.foto);
@@ -859,8 +891,8 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                    $('.btn-delete-spinner').css('display', 'block');
-                    $('.btn-delete-yes').css('display', 'none');
+                    $('.btn-delete-spinner').removeClass('d-none');
+                    $('.btn-delete-save').addClass('d-none');
                 },
                 success: function (response) {
                     Toast.fire({

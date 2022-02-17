@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cabang;
+use App\Models\Divisi;
 use App\Models\Jabatan;
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
@@ -23,10 +24,12 @@ class KaryawanController extends Controller
     {
         $jabatan = Jabatan::get();
         $cabang = Cabang::get();
+        $divisi = Divisi::get();
 
         return response()->json([
             'jabatans' => $jabatan,
-            'cabangs' => $cabang
+            'cabangs' => $cabang,
+            'divisis' => $divisi
         ]);
     }
 
@@ -49,6 +52,7 @@ class KaryawanController extends Controller
             'nomor_sim' => 'unique:karyawans|max:15',
             'cabang_id' => 'required',
             'jabatan_id' => 'required',
+            'divisi_id' => 'required',
             'tanggal_masuk' => 'required|date',
             'foto' => 'required|image|mimes:jpg,png,jpeg|max:2048'
         ]);
@@ -77,6 +81,7 @@ class KaryawanController extends Controller
             $karyawan->nomor_sim = $request->nomor_sim;
             $karyawan->cabang_id = $request->cabang_id;
             $karyawan->jabatan_id = $request->jabatan_id;
+            $karyawan->divisi_id = $request->divisi_id;
             $karyawan->tanggal_masuk = $request->tanggal_masuk;
             $karyawan->status_karyawan = "aktif";
 
@@ -105,6 +110,8 @@ class KaryawanController extends Controller
 
         $cabang = Cabang::get();
 
+        $divisi = Divisi::get();
+
         return response()->json([
             'id' => $karyawan->id,
             'foto' => $karyawan->foto,
@@ -125,10 +132,12 @@ class KaryawanController extends Controller
             'nomor_sim' => $karyawan->nomor_sim,
             'cabang_id' => $karyawan->cabang_id,
             'jabatan_id' => $karyawan->jabatan_id,
+            'divisi_id' => $karyawan->divisi_id,
             'tanggal_masuk' => $karyawan->tanggal_masuk,
             'status_karyawan' => $karyawan->status_karyawan,
             'jabatans' => $jabatan,
-            'cabangs' => $cabang
+            'cabangs' => $cabang,
+            'divisis' => $divisi
         ]);
     }
 
@@ -152,6 +161,7 @@ class KaryawanController extends Controller
         $karyawan->nomor_sim = $request->nomor_sim;
         $karyawan->cabang_id = $request->cabang_id;
         $karyawan->jabatan_id = $request->jabatan_id;
+        $karyawan->divisi_id = $request->divisi_id;
         $karyawan->tanggal_masuk = $request->tanggal_masuk;
 
         if($request->hasFile('foto')) {
