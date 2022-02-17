@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Log in (v2)</title>
+    <title>Aplikasi HRD</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -19,7 +19,7 @@
     <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="#" class="h1"><b>Admin</b>LTE</a>
+                <img src="{{ asset('assets/logo.png') }}" alt="logo" style="max-width: 100px;">
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
@@ -61,20 +61,20 @@
                                 </label>
                             </div>
                         </div>
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                    </div>
-                    <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
                     </div>
                 </form>
 
-                <!-- /.social-auth-links -->
+                <div class="text-center mt-3 mb-4">
+                    <h4 class="font-weight-bold text-info">Aplikasi HRD</h4>
+                </div>
 
                 <p class="mb-1">
                     @if (Route::has('password.request'))
                         <a href="{{ route('password.request') }}">
-                            {{ __('Forgot Your Password?') }}
+                            {{ __('Lupa password?') }}
                         </a>
                     @endif
                 </p>
