@@ -6,6 +6,7 @@ use App\Models\Cabang;
 use App\Models\Jabatan;
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -100,16 +101,70 @@ class KaryawanController extends Controller
     {
         $karyawan = Karyawan::find($id);
 
+        $jabatan = Jabatan::get();
+
+        $cabang = Cabang::get();
+
         return response()->json([
             'id' => $karyawan->id,
-            'nama' => $karyawan->nama
+            'foto' => $karyawan->foto,
+            'nik' => $karyawan->nik,
+            'nama_lengkap' => $karyawan->nama_lengkap,
+            'nama_panggilan' => $karyawan->nama_panggilan,
+            'telepon' => $karyawan->telepon,
+            'email' => $karyawan->email,
+            'nomor_ktp' => $karyawan->nomor_ktp,
+            'status_ktp' => $karyawan->status_ktp,
+            'tempat_lahir' => $karyawan->tempat_lahir,
+            'tanggal_lahir' => $karyawan->tanggal_lahir,
+            'agama' => $karyawan->agama,
+            'gender' => $karyawan->gender,
+            'alamat_asal' => $karyawan->alamat_asal,
+            'alamat_domisili' => $karyawan->alamat_domisili,
+            'jenis_sim' => $karyawan->jenis_sim,
+            'nomor_sim' => $karyawan->nomor_sim,
+            'cabang_id' => $karyawan->cabang_id,
+            'jabatan_id' => $karyawan->jabatan_id,
+            'tanggal_masuk' => $karyawan->tanggal_masuk,
+            'status_karyawan' => $karyawan->status_karyawan,
+            'jabatans' => $jabatan,
+            'cabangs' => $cabang
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $karyawan = Karyawan::find($id);
-        $karyawan->nama = $request->nama;
+        $karyawan = Karyawan::find($request->id);
+        $karyawan->nik = $request->nik;
+        $karyawan->nama_lengkap = $request->nama_lengkap;
+        $karyawan->nama_panggilan = $request->nama_panggilan;
+        $karyawan->telepon = $request->telepon;
+        $karyawan->email = $request->email;
+        $karyawan->nomor_ktp = $request->nomor_ktp;
+        $karyawan->status_ktp = $request->status_ktp;
+        $karyawan->tempat_lahir = $request->tempat_lahir;
+        $karyawan->tanggal_lahir = $request->tanggal_lahir;
+        $karyawan->agama = $request->agama;
+        $karyawan->gender = $request->gender;
+        $karyawan->alamat_asal = $request->alamat_asal;
+        $karyawan->alamat_domisili = $request->alamat_domisili;
+        $karyawan->jenis_sim = $request->jenis_sim;
+        $karyawan->nomor_sim = $request->nomor_sim;
+        $karyawan->cabang_id = $request->cabang_id;
+        $karyawan->jabatan_id = $request->jabatan_id;
+        $karyawan->tanggal_masuk = $request->tanggal_masuk;
+
+        if($request->hasFile('foto')) {
+            if (file_exists(public_path("image/" . $karyawan->foto))) {
+                File::delete(public_path("image/" . $karyawan->foto));
+            }
+            $file = $request->file('foto');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . "." . $extension;
+            $file->move('image/', $filename);
+            $karyawan->foto = $filename;
+        }
+
         $karyawan->save();
 
         return response()->json([
@@ -129,10 +184,22 @@ class KaryawanController extends Controller
     public function delete(Request $request)
     {
         $karyawan = Karyawan::find($request->id);
+
+        if (file_exists(public_path("image/" . $karyawan->foto))) {
+            File::delete(public_path("image/" . $karyawan->foto));
+        }
+
         $karyawan->delete();
 
         return response()->json([
             'status' => 'true'
         ]);
+    }
+
+    public function status(Request $request)
+    {
+        $karyawan =  Karyawan::find($request->id);
+        $karyawan->status_karyawan = $request->status;
+        $karyawan->save();
     }
 }

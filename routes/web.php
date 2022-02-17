@@ -47,7 +47,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('karyawan/create', [KaryawanController::class, 'create'])->name('karyawan.create');
     Route::post('karyawan/store', [KaryawanController::class, 'store'])->name('karyawan.store');
     Route::get('karyawan/{id}/edit', [KaryawanController::class, 'edit'])->name('karyawan.edit');
-    Route::put('karyawan/{id}/update', [KaryawanController::class, 'update'])->name('karyawan.update');
+    Route::post('karyawan/update', [KaryawanController::class, 'update'])->name('karyawan.update');
     Route::get('karyawan/{id}/delete_btn', [KaryawanController::class, 'deleteBtn'])->name('karyawan.delete_btn');
     Route::post('karyawan/delete', [KaryawanController::class, 'delete'])->name('karyawan.delete');
+    Route::post('karyawan/status', [KaryawanController::class, 'status'])->name('karyawan.status');
 });
