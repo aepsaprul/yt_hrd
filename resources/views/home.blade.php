@@ -32,7 +32,7 @@
               <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Karyawan Total</span>
+                <span class="info-box-text">Karyawan Aktif</span>
                 <span class="info-box-number">
                   10
                 </span>
@@ -47,7 +47,7 @@
               <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Karyawan Pria</span>
+                <span class="info-box-text">Karyawan Nonaktif</span>
                 <span class="info-box-number">41</span>
               </div>
               <!-- /.info-box-content -->
@@ -64,7 +64,7 @@
               <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Karyawan Wanita</span>
+                <span class="info-box-text">Pengajuan Cuti</span>
                 <span class="info-box-number">76</span>
               </div>
               <!-- /.info-box-content -->
@@ -77,7 +77,7 @@
               <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Karyawan Baru</span>
+                <span class="info-box-text">Pengajuan Lembur</span>
                 <span class="info-box-number">20</span>
               </div>
               <!-- /.info-box-content -->
@@ -92,7 +92,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h5 class="card-title">Monthly Recap Report</h5>
+                <h5 class="card-title">Kontrak Karyawan Yang Akan Habis</h5>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">

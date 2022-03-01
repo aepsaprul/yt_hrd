@@ -63,14 +63,10 @@
                                             <td>{{ $item->telepon }}</td>
                                             <td>{{ $item->email }}</td>
                                             <td class="text-center">
-                                                <input
-                                                    class="custom-control"
-                                                    type="checkbox"
-                                                    name="status_karyawan"
-                                                    id="status_karyawan_{{ $item->id }}"
-                                                    data-id="{{ $item->id }}"
-                                                    {{ $item->status_karyawan == "aktif" ? "checked" : "" }}
-                                                    data-bootstrap-switch>
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                                    <label class="custom-control-label" for="customSwitch1"></label>
+                                                  </div>
                                             </td>
                                             <td class="text-center">
                                                 <div class="btn-group">
@@ -543,10 +539,6 @@
 <script>
     $(function () {
         $("#example1").DataTable();
-
-        $("input[data-bootstrap-switch]").each(function(){
-            $(this).bootstrapSwitch('state', $(this).prop('checked'));
-        });
     });
 
 
@@ -816,7 +808,7 @@
                     $('#edit_divisi_id').append(value_divisi);
 
                     // $('.edit_profile_img img').prop('src', 'http://localhost/yt_master/yt_hrd/public/image/' + response.foto);
-                    $('.edit_profile_img img').prop('src', '{{ URL::to('') }}' + '/image/' + response.foto);
+                    $('.edit_profile_img img').prop("src", "{{ URL::to('') }}" + "/image/" + response.foto);
 
                     // modal
                     $('.modal-edit').modal('show');
@@ -850,7 +842,7 @@
                     }, 1000);
                 },
                 error: function(xhr, status, error) {
-                    var errorMessage = xhr.status + ': ' + statusText
+                    var errorMessage = xhr.status + ': ' + error
 
                     Toast.fire({
                         icon: 'danger',
