@@ -15,6 +15,10 @@ class CreateNavSubsTable extends Migration
     {
         Schema::create('nav_subs', function (Blueprint $table) {
             $table->id();
+            $table->string('title', 50)->nullable();
+            $table->string('link', 100)->nullable();
+            $table->integer('main_id')->nullable();
+            $table->string('set_active', 30)->nullable();
             $table->timestamps();
         });
     }
