@@ -60,7 +60,7 @@ class KaryawanController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'status' => 400,
-                'errors' => $validator->messages()
+                'errors' => $validator->errors()
             ]);
         } else {
             $karyawan = new Karyawan;

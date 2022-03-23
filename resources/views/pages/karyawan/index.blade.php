@@ -63,10 +63,17 @@
                                             <td>{{ $item->telepon }}</td>
                                             <td>{{ $item->email }}</td>
                                             <td class="text-center">
-                                                <div class="custom-control custom-switch">
-                                                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                                    <label class="custom-control-label" for="customSwitch1"></label>
-                                                  </div>
+                                                <div class="custom-control custom-switch custom-switch-on-success">
+                                                    <input
+                                                        type="checkbox"
+                                                        name="status"
+                                                        class="custom-control-input"
+                                                        id="status_{{ $item->id }}"
+                                                        data-id="{{ $item->id }}"
+                                                        {{ $item->status_karyawan == "aktif" ? "checked" : "" }}>
+                                                    <label class="custom-control-label" for="status_{{ $item->id }}"></label>
+                                                    <span class="status_title_{{ $item->id }} text-uppercase" style="font-size: 12px;">{{ $item->status_karyawan }}</span>
+                                                </div>
                                             </td>
                                             <td class="text-center">
                                                 <div class="btn-group">
@@ -107,41 +114,44 @@
 </div>
 <!-- /.content-wrapper -->
 
-<!-- Modal create -->
-<div class="modal fade modal-create" id="modal-create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade modal-form" id="modal-default" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <form id="form-create" method="post" enctype="multipart/form-data">
-
+            <form id="form" method="post" enctype="multipart/form-data" class="form-create">
                 <div class="modal-body">
+
+                    {{-- id --}}
+                    <input type="hidden" id="id" name="id">
+
                     <div class="row">
                         <div class="col-md-3">
                             <div class="card card-primary card-outline">
                                 <div class="card-body box-profile pb-3">
-                                    <div class="text-center profile_img create_profile_img">
+                                    <div class="text-center profile_img">
                                         <img
                                             class="profile-user-img img-fluid img-circle"
                                             src="{{ asset('assets/user.jpg') }}"
                                             alt="User profile picture">
                                     </div>
                                     <div class="form-group">
-                                        <label for="create_foto">Foto</label>
-                                        <input type="file" id="create_foto" name="foto" class="form-control form-control-sm" >
+                                        <label for="foto">Foto</label>
+                                        <input type="file" id="foto" name="foto" class="form-control form-control-sm" >
                                         <small id="errorFoto" class="form-text text-danger"></small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="create_nik">NIK</label>
-                                        <input type="text" id="create_nik" name="nik" class="form-control form-control-sm" value="{{ date('ymdhis') }}" maxlength="12" >
+                                        <label for="nik">NIK</label>
+                                        <input type="text" id="nik" name="nik" class="form-control form-control-sm" value="{{ date('ymdhis') }}" maxlength="12" >
                                         <small id="errorNik" class="form-text text-danger"></small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="create_telepon">Telepon</label>
-                                        <input type="text" id="create_telepon" name="telepon" class="form-control form-control-sm" maxlength="15" >
+                                        <label for="telepon">Telepon</label>
+                                        <input type="text" id="telepon" name="telepon" class="form-control form-control-sm" maxlength="15" >
                                         <small id="errorTelepon" class="form-text text-danger"></small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="create_email">Email</label>
-                                        <input type="email" id="create_email" name="email" class="form-control form-control-sm" maxlength="50" >
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" name="email" class="form-control form-control-sm" maxlength="50" >
                                         <small id="errorEmail" class="form-text text-danger"></small>
                                     </div>
                                 </div>
@@ -153,22 +163,22 @@
                                     <div class="row">
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="create_nama_lengkap">Nama Lengkap</label>
-                                                <input type="text" id="create_nama_lengkap" name="nama_lengkap" class="form-control form-control-sm" maxlength="30" >
+                                                <label for="nama_lengkap">Nama Lengkap</label>
+                                                <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-control form-control-sm" maxlength="30" >
                                                 <small id="errorNamaLengkap" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="create_nama_panggilan">Nama Panggilan</label>
-                                                <input type="text" id="create_nama_panggilan" name="nama_panggilan" class="form-control form-control-sm" maxlength="15" >
+                                                <label for="nama_panggilan">Nama Panggilan</label>
+                                                <input type="text" id="nama_panggilan" name="nama_panggilan" class="form-control form-control-sm" maxlength="15" >
                                                 <small id="errorNamaPanggilan" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="create_gender">Gender</label>
-                                                <select name="gender" id="create_gender" class="form-control form-control-sm">
+                                                <label for="gender">Gender</label>
+                                                <select name="gender" id="gender" class="form-control form-control-sm">
                                                     <option value="l">L (Laki - laki)</option>
                                                     <option value="p">P (Perempuan)</option>
                                                 </select>
@@ -176,22 +186,22 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="create_nomor_ktp">Nomor KTP</label>
-                                                <input type="number" id="create_nomor_ktp" name="nomor_ktp" class="form-control form-control-sm" maxlength="16" >
+                                                <label for="nomor_ktp">Nomor KTP</label>
+                                                <input type="number" id="nomor_ktp" name="nomor_ktp" class="form-control form-control-sm" maxlength="16" >
                                                 <small id="errorNomorKtp" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="create_status_ktp">Status KTP</label>
-                                                <input type="text" id="create_status_ktp" name="status_ktp" class="form-control form-control-sm" maxlength="30" >
+                                                <label for="status_ktp">Status KTP</label>
+                                                <input type="text" id="status_ktp" name="status_ktp" class="form-control form-control-sm" maxlength="30" >
                                                 <small id="errorStatusKtp" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="create_agama">Agama</label>
-                                                <select name="agama" id="create_agama" class="form-control form-control-sm">
+                                                <label for="agama">Agama</label>
+                                                <select name="agama" id="agama" class="form-control form-control-sm">
                                                     <option value="islam">Islam</option>
                                                     <option value="kristen_protestan">Kristen Protestan</option>
                                                     <option value="katholik">Katholik</option>
@@ -203,15 +213,15 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="create_tempat_lahir">Tempat Lahir</label>
-                                                <input type="text" id="create_tempat_lahir" name="tempat_lahir" class="form-control form-control-sm" maxlength="30" >
+                                                <label for="tempat_lahir">Tempat Lahir</label>
+                                                <input type="text" id="tempat_lahir" name="tempat_lahir" class="form-control form-control-sm" maxlength="30" >
                                                 <small id="errorTempatLahir" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="create_tanggal_lahir">Tanggal Lahir</label>
-                                                <input type="date" id="create_tanggal_lahir" name="tanggal_lahir" class="form-control form-control-sm" >
+                                                <label for="tanggal_lahir">Tanggal Lahir</label>
+                                                <input type="date" id="tanggal_lahir" name="tanggal_lahir" class="form-control form-control-sm" >
                                                 <small id="errorTanggalLahir" class="form-text text-danger"></small>
                                             </div>
                                         </div>
@@ -220,11 +230,11 @@
                                                 <label for="sim">Jenis & Nomor SIM</label>
                                                 <div class="row">
                                                     <div class="col-md-4 col-sm-4 col-4">
-                                                        <input type="text" id="create_jenis_sim" name="jenis_sim" class="form-control form-control-sm" maxlength="10">
+                                                        <input type="text" id="jenis_sim" name="jenis_sim" class="form-control form-control-sm" maxlength="10">
                                                         <small id="errorJenisSim" class="form-text text-danger"></small>
                                                     </div>
                                                     <div class="col-md-8 col-sm-8 col-8">
-                                                        <input type="text" id="create_nomor_sim" name="nomor_sim" class="form-control form-control-sm" maxlength="15">
+                                                        <input type="text" id="nomor_sim" name="nomor_sim" class="form-control form-control-sm" maxlength="15">
                                                         <small id="errorNomorSim" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
@@ -232,29 +242,29 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="create_alamat_asal">Alamat Asal</label>
-                                                <input type="text" id="create_alamat_asal" name="alamat_asal" class="form-control form-control-sm" >
+                                                <label for="alamat_asal">Alamat Asal</label>
+                                                <input type="text" id="alamat_asal" name="alamat_asal" class="form-control form-control-sm" >
                                                 <small id="errorAlamatAsal" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="create_alamat_domisili">Alamat Domisili</label>
-                                                <input type="text" id="create_alamat_domisili" name="alamat_domisili" class="form-control form-control-sm" >
+                                                <label for="alamat_domisili">Alamat Domisili</label>
+                                                <input type="text" id="alamat_domisili" name="alamat_domisili" class="form-control form-control-sm" >
                                                 <small id="errorAlamatDomisili" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="create_tanggal_masuk">Tanggal Masuk</label>
-                                                <input type="date" id="create_tanggal_masuk" name="tanggal_masuk" class="form-control form-control-sm" >
+                                                <label for="tanggal_masuk">Tanggal Masuk</label>
+                                                <input type="date" id="tanggal_masuk" name="tanggal_masuk" class="form-control form-control-sm" >
                                                 <small id="errorTanggalMasuk" class="form-text text-danger"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="create_cabang_id">Cabang</label>
-                                                <select name="cabang_id" id="create_cabang_id" class="form-control form-control-sm" >
+                                                <label for="cabang_id">Cabang</label>
+                                                <select name="cabang_id" id="cabang_id" class="form-control form-control-sm" >
 
                                                 </select>
                                                 <small id="errorCabangId" class="form-text text-danger"></small>
@@ -262,8 +272,8 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="create_jabatan_id">Jabatan</label>
-                                                <select name="jabatan_id" id="create_jabatan_id" class="form-control form-control-sm" >
+                                                <label for="jabatan_id">Jabatan</label>
+                                                <select name="jabatan_id" id="jabatan_id" class="form-control form-control-sm" >
 
                                                 </select>
                                                 <small id="errorJabatanId" class="form-text text-danger"></small>
@@ -271,8 +281,8 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="create_divisi_id">Divisi</label>
-                                                <select name="divisi_id" id="create_divisi_id" class="form-control form-control-sm" >
+                                                <label for="divisi_id">Divisi</label>
+                                                <select name="divisi_id" id="divisi_id" class="form-control form-control-sm" >
 
                                                 </select>
                                                 <small id="errorDivisiId" class="form-text text-danger"></small>
@@ -284,207 +294,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-danger" data-dismiss="modal" style="width: 130px;">
                         <i class="fas fa-times"></i> Tutup
                     </button>
-                    <button class="btn btn-primary btn-create-spinner d-none" disabled style="width: 130px;">
+                    <button class="btn btn-primary btn-spinner d-none" disabled style="width: 130px;">
                         <span class="spinner-grow spinner-grow-sm"></span>
                         Loading...
                     </button>
-                    <button type="submit" class="btn btn-primary btn-create-save" style="width: 130px;">
-                        <i class="fas fa-save"></i> Simpan
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-{{-- modal edit --}}
-<div class="modal fade modal-edit" id="modal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <form id="form-edit" method="post" enctype="multipart/form-data">
-
-                <!-- id -->
-                <input type="hidden" name="id" id="edit_id">
-
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="card card-primary card-outline">
-                                <div class="card-body box-profile pb-3">
-                                    <div class="text-center profile_img edit_profile_img">
-                                        <img
-                                            class="profile-user-img img-fluid img-circle"
-                                            src="{{ asset('assets/user.jpg') }}"
-                                            alt="User profile picture">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="edit_foto">Foto</label>
-                                        <input type="file" id="edit_foto" name="foto" class="form-control form-control-sm" >
-                                        <small id="errorFoto" class="form-text text-danger"></small>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="edit_nik">NIK</label>
-                                        <input type="text" id="edit_nik" name="nik" class="form-control form-control-sm" value="{{ date('ymdhis') }}" maxlength="12" >
-                                        <small id="errorNik" class="form-text text-danger"></small>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="edit_telepon">Telepon</label>
-                                        <input type="text" id="edit_telepon" name="telepon" class="form-control form-control-sm" maxlength="15" >
-                                        <small id="errorTelepon" class="form-text text-danger"></small>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="edit_email">Email</label>
-                                        <input type="email" id="edit_email" name="email" class="form-control form-control-sm" maxlength="50" >
-                                        <small id="errorEmail" class="form-text text-danger"></small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card card-primary card-outline pb-3">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="edit_nama_lengkap">Nama Lengkap</label>
-                                                <input type="text" id="edit_nama_lengkap" name="nama_lengkap" class="form-control form-control-sm" maxlength="30" >
-                                                <small id="errorNamaLengkap" class="form-text text-danger"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="edit_nama_panggilan">Nama Panggilan</label>
-                                                <input type="text" id="edit_nama_panggilan" name="nama_panggilan" class="form-control form-control-sm" maxlength="15" >
-                                                <small id="errorNamaPanggilan" class="form-text text-danger"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="edit_gender">Gender</label>
-                                                <select name="gender" id="edit_gender" class="form-control form-control-sm">
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="edit_nomor_ktp">Nomor KTP</label>
-                                                <input type="number" id="edit_nomor_ktp" name="nomor_ktp" class="form-control form-control-sm" maxlength="16" >
-                                                <small id="errorNomorKtp" class="form-text text-danger"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="edit_status_ktp">Status KTP</label>
-                                                <input type="text" id="edit_status_ktp" name="status_ktp" class="form-control form-control-sm" maxlength="30" >
-                                                <small id="errorStatusKtp" class="form-text text-danger"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="edit_agama">Agama</label>
-                                                <select name="agama" id="edit_agama" class="form-control form-control-sm">
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="edit_tempat_lahir">Tempat Lahir</label>
-                                                <input type="text" id="edit_tempat_lahir" name="tempat_lahir" class="form-control form-control-sm" maxlength="30" >
-                                                <small id="errorTempatLahir" class="form-text text-danger"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="edit_tanggal_lahir">Tanggal Lahir</label>
-                                                <input type="date" id="edit_tanggal_lahir" name="tanggal_lahir" class="form-control form-control-sm" >
-                                                <small id="errorTanggalLahir" class="form-text text-danger"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="edit_alamat_asal">Alamat Asal</label>
-                                                <input type="text" id="edit_alamat_asal" name="alamat_asal" class="form-control form-control-sm" >
-                                                <small id="errorAlamatAsal" class="form-text text-danger"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="sim">Jenis & Nomor SIM</label>
-                                                <div class="row">
-                                                    <div class="col-md-4 col-sm-4 col-4">
-                                                        <input type="text" id="edit_jenis_sim" name="jenis_sim" class="form-control form-control-sm" maxlength="10" >
-                                                        <small id="errorJenisSim" class="form-text text-danger"></small>
-                                                    </div>
-                                                    <div class="col-md-8 col-sm-8 col-8">
-                                                        <input type="text" id="edit_nomor_sim" name="nomor_sim" class="form-control form-control-sm" maxlength="15" >
-                                                        <small id="errorNomorSim" class="form-text text-danger"></small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="edit_alamat_domisili">Alamat Domisili</label>
-                                                <input type="text" id="edit_alamat_domisili" name="alamat_domisili" class="form-control form-control-sm" >
-                                                <small id="errorAlamatDomisili" class="form-text text-danger"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="edit_tanggal_masuk">Tanggal Masuk</label>
-                                                <input type="date" id="edit_tanggal_masuk" name="tanggal_masuk" class="form-control form-control-sm" >
-                                                <small id="errorTanggalMasuk" class="form-text text-danger"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="edit_cabang_id">Cabang</label>
-                                                <select name="cabang_id" id="edit_cabang_id" class="form-control form-control-sm" >
-
-                                                </select>
-                                                <small id="errorCabangId" class="form-text text-danger"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="edit_jabatan_id">Jabatan</label>
-                                                <select name="jabatan_id" id="edit_jabatan_id" class="form-control form-control-sm" >
-
-                                                </select>
-                                                <small id="errorJabatanId" class="form-text text-danger"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <label for="edit_divisi_id">Divisi</label>
-                                                <select name="divisi_id" id="edit_divisi_id" class="form-control form-control-sm" >
-
-                                                </select>
-                                                <small id="errorDivisiId" class="form-text text-danger"></small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="width: 130px;">
-                        <i class="fas fa-times"></i> Tutup
-                    </button>
-                    <button class="btn btn-primary btn-edit-spinner d-none" disabled style="width: 130px;">
-                        <span class="spinner-grow spinner-grow-sm"></span>
-                        Loading...
-                    </button>
-                    <button type="submit" class="btn btn-primary btn-edit-save" style="width: 130px;">
-                        <i class="fas fa-save"></i> Perbaharui
+                    <button type="submit" class="btn btn-primary btn-save" style="width: 130px;">
+                        <i class="fas fa-save"></i> <span class="modal-btn">Simpan</span>
                     </button>
                 </div>
             </form>
@@ -507,7 +326,7 @@
                         <span class="spinner-grow spinner-grow-sm"></span>
                         Loading...
                     </button>
-                    <button type="submit" class="btn btn-primary btn-delete-yes text-center" style="width: 130px;">
+                    <button type="submit" class="btn btn-primary btn-delete-save text-center" style="width: 130px;">
                         Ya
                     </button>
                 </div>
@@ -559,30 +378,7 @@
         // create foto
         $('input[type="file"][name="foto"]').on('change', function() {
             var img_path = $(this)[0].value;
-            var img_holder = $('.create_profile_img');
-            var currentImagePath = $(this).data('value');
-            var extension = img_path.substring(img_path.lastIndexOf('.')+1).toLowerCase();
-            if (extension == 'jpg' || extension == 'jpeg' || extension == 'png') {
-                if (typeof(FileReader) != 'undefind') {
-                    img_holder.empty();
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        $('<img/>', {'src':e.target.result, 'class':'profile-user-img img-fluid img-circle'}).appendTo(img_holder);
-                    }
-                    img_holder.show();
-                    reader.readAsDataURL($(this)[0].files[0]);
-                } else {
-                    $(img_holder).html('Browser tidak support FileReader');
-                }
-            } else {
-                $(img_holder).html(currentImagePath);
-            }
-        });
-
-        // edit foto
-        $('input[type="file"][name="foto"]').on('change', function() {
-            var img_path = $(this)[0].value;
-            var img_holder = $('.edit_profile_img');
+            var img_holder = $('.profile_img');
             var currentImagePath = $(this).data('value');
             var extension = img_path.substring(img_path.lastIndexOf('.')+1).toLowerCase();
             if (extension == 'jpg' || extension == 'jpeg' || extension == 'png') {
@@ -637,30 +433,30 @@
                     $.each(response.jabatans, function (index, value) {
                          value_jabatan += "<option value=\"" + value.id + "\">" + value.nama + "</option>";
                     });
-                    $('#create_jabatan_id').append(value_jabatan);
+                    $('#jabatan_id').append(value_jabatan);
 
                     var value_cabang = "<option value=\"\">--Pilih Cabang--</option>";
                     $.each(response.cabangs, function (index, value) {
                          value_cabang += "<option value=\"" + value.id + "\">" + value.nama + "</option>";
                     });
-                    $('#create_cabang_id').append(value_cabang);
+                    $('#cabang_id').append(value_cabang);
 
                     var value_divisi = "<option value=\"\">--Pilih Divisi--</option>";
                     $.each(response.divisis, function (index, value) {
                          value_divisi += "<option value=\"" + value.id + "\">" + value.nama + "</option>";
                     });
-                    $('#create_divisi_id').append(value_divisi);
+                    $('#divisi_id').append(value_divisi);
 
-                    $('.modal-create').modal('show');
+                    $('.modal-form').modal('show');
                 }
             });
         });
 
-        $(document).on('shown.bs.modal', '#modal-create', function() {
+        $(document).on('shown.bs.modal', '.modal-form', function() {
             $('#nama_lengkap').focus();
         });
 
-        $(document).on('submit', '#form-create', function (e) {
+        $(document).on('submit', '.form-create', function (e) {
             e.preventDefault();
 
             $('#errorNik').empty();
@@ -684,7 +480,7 @@
             $('#errorTanggalMasuk').empty();
             $('#errorFoto').empty();
 
-            let formData = new FormData($('#form-create')[0]);
+            let formData = new FormData($('#form')[0]);
 
             $.ajax({
                 type: "POST",
@@ -693,8 +489,8 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                    $('.btn-create-spinner').removeClass('d-none');
-                    $('.btn-create-save').addClass('d-none');
+                    $('.btn-spinner').removeClass('d-none');
+                    $('.btn-save').addClass('d-none');
                 },
                 success: function (response) {
                     if (response.status == 400) {
@@ -720,8 +516,8 @@
                         $('#errorFoto').append(response.errors.foto);
 
                         setTimeout(() => {
-                            $('.btn-create-spinner').addClass('d-none');
-                            $('.btn-create-save').removeClass('d-none');
+                            $('.btn-spinner').addClass('d-none');
+                            $('.btn-save').removeClass('d-none');
                         }, 1000);
                     } else {
                         Toast.fire({
@@ -746,7 +542,12 @@
         });
 
         // edit
-        $(document).on('click', '.btn-edit', function () {
+        $(document).on('click', '.btn-edit', function (e) {
+            e.preventDefault();
+
+            $('.modal-btn').empty();
+            $('#foto').empty();
+
             var id = $(this).attr('data-id');
             var url = "{{ route('karyawan.edit', ':id') }}";
             url = url.replace(':id', id);
@@ -759,21 +560,25 @@
                 type: "get",
                 url: url,
                 success: function (response) {
-                    $('#edit_id').val(response.id);
-                    $('#edit_nik').val(response.nik);
-                    $('#edit_nama_lengkap').val(response.nama_lengkap);
-                    $('#edit_nama_panggilan').val(response.nama_panggilan);
-                    $('#edit_telepon').val(response.telepon);
-                    $('#edit_email').val(response.email);
-                    $('#edit_nomor_ktp').val(response.nomor_ktp);
-                    $('#edit_status_ktp').val(response.status_ktp);
-                    $('#edit_tempat_lahir').val(response.tempat_lahir);
-                    $('#edit_tanggal_lahir').val(response.tanggal_lahir);
-                    $('#edit_alamat_asal').val(response.alamat_asal);
-                    $('#edit_alamat_domisili').val(response.alamat_domisili);
-                    $('#edit_jenis_sim').val(response.jenis_sim);
-                    $('#edit_nomor_sim').val(response.nomor_sim);
-                    $('#edit_tanggal_masuk').val(response.tanggal_masuk);
+                    $('#form').removeClass('form-create');
+                    $('#form').addClass('form-edit');
+                    $('.modal-btn').append("Perbaharui");
+
+                    $('#id').val(response.id);
+                    $('#nik').val(response.nik);
+                    $('#nama_lengkap').val(response.nama_lengkap);
+                    $('#nama_panggilan').val(response.nama_panggilan);
+                    $('#telepon').val(response.telepon);
+                    $('#email').val(response.email);
+                    $('#nomor_ktp').val(response.nomor_ktp);
+                    $('#status_ktp').val(response.status_ktp);
+                    $('#tempat_lahir').val(response.tempat_lahir);
+                    $('#tanggal_lahir').val(response.tanggal_lahir);
+                    $('#alamat_asal').val(response.alamat_asal);
+                    $('#alamat_domisili').val(response.alamat_domisili);
+                    $('#jenis_sim').val(response.jenis_sim);
+                    $('#nomor_sim').val(response.nomor_sim);
+                    $('#tanggal_masuk').val(response.tanggal_masuk);
 
                     let value_agama = "" +
                         "<option value=\"islam\""; if (response.agama == "islam") { value_agama += " selected"; } value_agama += ">Islam</option>" +
@@ -782,44 +587,43 @@
                         "<option value=\"hindu\""; if (response.agama == "hindu") { value_agama += " selected"; } value_agama += ">Hindu</option>" +
                         "<option value=\"budha\""; if (response.agama == "budha") { value_agama += " selected"; } value_agama += ">Budha</option>" +
                         "<option value=\"kong_hu_cu\""; if (response.agama == "kong_hu_cu") { value_agama += " selected"; } value_agama += ">Kong Hu Cu</option>";
-                    $('#edit_agama').append(value_agama);
+                    $('#agama').append(value_agama);
 
                     let value_gender = "" +
                         "<option value=\"l\""; if (response.gender == "l") { value_gender += " selected"; } value_gender += ">L (Laki - laki)</option>" +
                         "<option value=\"p\""; if (response.gender == "p") { value_gender += " selected"; } value_gender += ">P (Perempuan)</option>";
-                    $('#edit_gender').append(value_gender);
+                    $('#gender').append(value_gender);
 
                     let value_cabang = "";
                     $.each(response.cabangs, function (index, value) {
                          value_cabang += "<option value=\"" + value.id + "\""; if (value.id == response.cabang_id) { value_cabang += " selected"; } value_cabang += ">" + value.nama + "</option>";
                     });
-                    $('#edit_cabang_id').append(value_cabang);
+                    $('#cabang_id').append(value_cabang);
 
                     let value_jabatan = "";
                     $.each(response.jabatans, function (index, value) {
                          value_jabatan += "<option value=\"" + value.id + "\""; if (value.id == response.jabatan_id) { value_jabatan += " selected"; } value_jabatan += ">" + value.nama + "</option>";
                     });
-                    $('#edit_jabatan_id').append(value_jabatan);
+                    $('#jabatan_id').append(value_jabatan);
 
                     let value_divisi = "";
                     $.each(response.divisis, function (index, value) {
                          value_divisi += "<option value=\"" + value.id + "\""; if (value.id == response.divisi_id) { value_divisi += " selected"; } value_divisi += ">" + value.nama + "</option>";
                     });
-                    $('#edit_divisi_id').append(value_divisi);
+                    $('#divisi_id').append(value_divisi);
 
-                    // $('.edit_profile_img img').prop('src', 'http://localhost/yt_master/yt_hrd/public/image/' + response.foto);
-                    $('.edit_profile_img img').prop("src", "{{ URL::to('') }}" + "/image/" + response.foto);
+                    $('.profile_img img').prop("src", "{{ URL::to('') }}" + "/image/" + response.foto);
 
                     // modal
-                    $('.modal-edit').modal('show');
+                    $('.modal-form').modal('show');
                 }
             });
         });
 
-        $(document).on('submit', '#form-edit', function (e) {
+        $(document).on('submit', '.form-edit', function (e) {
             e.preventDefault();
 
-            let formData = new FormData($('#form-edit')[0]);
+            let formData = new FormData($('#form')[0]);
 
             $.ajax({
                 type: "POST",
@@ -828,8 +632,8 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                    $('.btn-edit-spinner').removeClass('d-none');
-                    $('.btn-edit-save').addClass('d-none');
+                    $('.btn-spinner').removeClass('d-none');
+                    $('.btn-save').addClass('d-none');
                 },
                 success: function (response) {
                     Toast.fire({
@@ -873,7 +677,9 @@
             });
         });
 
-        $(document).on('submit', '#form-delete', function () {
+        $(document).on('submit', '#form-delete', function (e) {
+            e.preventDefault();
+
             let formData = new FormData($('#form-delete')[0]);
 
             $.ajax({
