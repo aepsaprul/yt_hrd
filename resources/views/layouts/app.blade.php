@@ -84,8 +84,8 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="{{ asset('assets/logo-circle.png') }}" alt="AdminLTE Logo" class="brand-image img-circle" style="opacity: .8">
+            <a href="#" class="brand-link">
+                <img src="{{ asset('assets/logo-circle.png') }}" alt="mc logo" class="brand-image img-circle" style="opacity: .8">
                 <span class="brand-text font-weight-light">Aplikasi HRD</span>
             </a>
 
@@ -140,21 +140,27 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('cabang.index') }}" class="nav-link">
+                            <a href="{{ route('cabang.index') }}" class="nav-link {{ request()->is(['cabang', 'cabang/*']) ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-sitemap text-center mr-2" style="width: 30px"></i>
                                 <p>Cabang</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('divisi.index') }}" class="nav-link">
+                            <a href="{{ route('divisi.index') }}" class="nav-link {{ request()->is(['divisi', 'divisi/*']) ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-user-friends text-center mr-2" style="width: 30px"></i>
                                 <p>Divisi</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('jabatan.index') }}" class="nav-link">
+                            <a href="{{ route('jabatan.index') }}" class="nav-link {{ request()->is(['jabatan', 'jabatan/*']) ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-id-card text-center mr-2" style="width: 30px"></i>
                                 <p>Jabatan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('role.index') }}" class="nav-link {{ request()->is(['role', 'role/*']) ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-address-book text-center mr-2" style="width: 30px"></i>
+                                <p>Role</p>
                             </a>
                         </li>
                         <li class="nav-item">

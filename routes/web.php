@@ -6,6 +6,7 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\NavMainController;
 use App\Http\Controllers\NavSubController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -70,6 +71,14 @@ Route::middleware(['auth'])->group(function () {
     Route::put('jabatan/{id}/update', [JabatanController::class, 'update'])->name('jabatan.update');
     Route::get('jabatan/{id}/delete_btn', [JabatanController::class, 'deleteBtn'])->name('jabatan.delete_btn');
     Route::post('jabatan/delete', [JabatanController::class, 'delete'])->name('jabatan.delete');
+
+    // role
+    Route::get('role', [RoleController::class, 'index'])->name('role.index');
+    Route::post('role/store', [RoleController::class, 'store'])->name('role.store');
+    Route::get('role/{id}/edit', [RoleController::class, 'edit'])->name('role.edit');
+    Route::post('role/update', [RoleController::class, 'update'])->name('role.update');
+    Route::get('role/{id}/delete_btn', [RoleController::class, 'deleteBtn'])->name('role.delete_btn');
+    Route::post('role/delete', [RoleController::class, 'delete'])->name('role.delete');
 
     // karyawan
     Route::get('karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
