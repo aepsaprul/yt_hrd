@@ -117,22 +117,27 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('home.index') }}" class="nav-link {{ request()->is(['home', 'home/*']) ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt text-center mr-2" style="width: 30px"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('nav_main.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-paper-plane text-center mr-2" style="width: 30px"></i>
-                                <p>Nav Main</p>
+                        <li class="nav-item {{ request()->is('master/*') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ request()->is('master/*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-database text-center mr-2" style="width: 30px;"></i><p>Master<i class="right fas fa-angle-left"></i></p>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('nav_sub.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-paper-plane text-center mr-2" style="width: 30px"></i>
-                                <p>Nav Sub</p>
-                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('nav_main.index') }}" class="nav-link {{ request()->is('master/nav_main') ? 'active' : '' }}">
+                                        <i class="fas fa-angle-right nav-icon"></i><p>Nav Main</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('nav_sub.index') }}" class="nav-link {{ request()->is('master/nav_sub') ? 'active' : '' }}">
+                                        <i class="fas fa-angle-right nav-icon"></i><p>Nav Sub</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('cabang.index') }}" class="nav-link">

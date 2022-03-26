@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class NavSub extends Model
 {
     use HasFactory;
+
+    public function navMain() {
+        return $this->belongsTo(NavMain::class, 'main_id', 'id');
+    }
 }

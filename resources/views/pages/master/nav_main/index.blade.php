@@ -235,7 +235,7 @@
         });
 
         $(document).on('shown.bs.modal', '.modal-form', function() {
-            $('#nama').focus();
+            $('#title').focus();
         });
 
         $(document).on('submit', '.form-create', function (e) {

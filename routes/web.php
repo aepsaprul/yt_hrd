@@ -26,25 +26,26 @@ Auth::routes([
     'register' => false
 ]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 
 Route::middleware(['auth'])->group(function () {
     // master
         // nav main
-        Route::get('nav_main', [NavMainController::class, 'index'])->name('nav_main.index');
-        Route::post('nav_main/store', [NavMainController::class, 'store'])->name('nav_main.store');
-        Route::get('nav_main/{id}/edit', [NavMainController::class, 'edit'])->name('nav_main.edit');
-        Route::post('nav_main/update', [NavMainController::class, 'update'])->name('nav_main.update');
-        Route::get('nav_main/{id}/delete_btn', [NavMainController::class, 'deleteBtn'])->name('nav_main.delete_btn');
-        Route::post('nav_main/delete', [NavMainController::class, 'delete'])->name('nav_main.delete');
+        Route::get('master/nav_main', [NavMainController::class, 'index'])->name('nav_main.index');
+        Route::post('master/nav_main/store', [NavMainController::class, 'store'])->name('nav_main.store');
+        Route::get('master/nav_main/{id}/edit', [NavMainController::class, 'edit'])->name('nav_main.edit');
+        Route::post('master/nav_main/update', [NavMainController::class, 'update'])->name('nav_main.update');
+        Route::get('master/nav_main/{id}/delete_btn', [NavMainController::class, 'deleteBtn'])->name('nav_main.delete_btn');
+        Route::post('master/nav_main/delete', [NavMainController::class, 'delete'])->name('nav_main.delete');
 
         // nav sub
-        Route::get('nav_sub', [NavSubController::class, 'index'])->name('nav_sub.index');
-        Route::post('nav_sub/store', [NavSubController::class, 'store'])->name('nav_sub.store');
-        Route::get('nav_sub/{id}/edit', [NavSubController::class, 'edit'])->name('nav_sub.edit');
-        Route::post('nav_sub/update', [NavSubController::class, 'update'])->name('nav_sub.update');
-        Route::get('nav_sub/{id}/delete_btn', [NavSubController::class, 'deleteBtn'])->name('nav_sub.delete_btn');
-        Route::post('nav_sub/delete', [NavSubController::class, 'delete'])->name('nav_sub.delete');
+        Route::get('master/nav_sub', [NavSubController::class, 'index'])->name('nav_sub.index');
+        Route::get('master/nav_sub/create', [NavSubController::class, 'create'])->name('nav_sub.create');
+        Route::post('master/nav_sub/store', [NavSubController::class, 'store'])->name('nav_sub.store');
+        Route::get('master/nav_sub/{id}/edit', [NavSubController::class, 'edit'])->name('nav_sub.edit');
+        Route::post('master/nav_sub/update', [NavSubController::class, 'update'])->name('nav_sub.update');
+        Route::get('master/nav_sub/{id}/delete_btn', [NavSubController::class, 'deleteBtn'])->name('nav_sub.delete_btn');
+        Route::post('master/nav_sub/delete', [NavSubController::class, 'delete'])->name('nav_sub.delete');
 
     // cabang
     Route::get('cabang', [CabangController::class, 'index'])->name('cabang.index');
