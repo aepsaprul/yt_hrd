@@ -370,8 +370,7 @@
             url = url.replace(':id', id);
 
             var formData = {
-                id: id,
-                _token: CSRF_TOKEN
+                id: id
             }
 
             $.ajax({
@@ -389,8 +388,7 @@
             e.preventDefault();
 
             var formData = {
-                id: $('#delete_id').val(),
-                _token: CSRF_TOKEN
+                id: $('#delete_id').val()
             }
 
             $.ajax({
