@@ -626,8 +626,8 @@
             let formData = new FormData($('#form')[0]);
 
             $.ajax({
-                type: "POST",
                 url: "{{ URL::route('karyawan.update') }}",
+                type: "POST",
                 data: formData,
                 contentType: false,
                 processData: false,

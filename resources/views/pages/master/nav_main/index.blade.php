@@ -18,12 +18,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Cabang</h1>
+                    <h1>Navigasi Main</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Cabang</li>
+                        <li class="breadcrumb-item active">Navigasi Main</li>
                     </ol>
                 </div>
             </div>
@@ -49,15 +49,21 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center text-indigo">No</th>
-                                        <th class="text-center text-indigo">Nama Cabang</th>
+                                        <th class="text-center text-indigo">Title</th>
+                                        <th class="text-center text-indigo">Link</th>
+                                        <th class="text-center text-indigo">Icon</th>
+                                        <th class="text-center text-indigo">Set Active</th>
                                         <th class="text-center text-indigo">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($cabangs as $key => $item)
+                                    @foreach ($nav_mains as $key => $item)
                                         <tr>
                                             <td class="text-center">{{ $key + 1 }}</td>
-                                            <td>{{ $item->nama }}</td>
+                                            <td>{{ $item->title }}</td>
+                                            <td>{{ $item->link }}</td>
+                                            <td>{{ $item->icon }}</td>
+                                            <td>{{ $item->set_active }}</td>
                                             <td class="text-center">
                                                 <div class="btn-group">
                                                     <a
@@ -89,94 +95,77 @@
                                 </tbody>
                             </table>
                         </div>
-                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
 
-<div class="modal fade modal-create" id="modal-default">
+<div class="modal fade modal-form" id="modal-default">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="form-create">
+            <form id="form" method="POST" class="form-create">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data Cabang</h4>
+                    <h4 class="modal-title">Tambah Data Navigasi Main</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="create_nama" class="form-label">Nama Cabang</label>
-                        <input type="text"
-                            class="form-control form-control-sm"
-                            id="create_nama"
-                            name="create_nama"
-                            maxlength="30"
-                            required>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button class="btn btn-primary btn-spinner-create" disabled style="width: 130px; display: none;">
-                        <span class="spinner-grow spinner-grow-sm"></span>
-                        Loading...
-                    </button>
-                    <button type="submit" class="btn btn-primary btn-create-save" style="width: 130px;">
-                        <i class="fas fa-save"></i> Simpan
-                    </button>
-                </div>
-            </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 
-<div class="modal fade modal-edit" id="modal-default">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form id="form-edit">
-                <input type="hidden" id="edit_id" name="edit_id">
-                <div class="modal-header">
-                    <h4 class="modal-title">Ubah Data Cabang</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+                    {{-- id --}}
+                    <input type="hidden" name="id" id="id">
+
                     <div class="mb-3">
-                        <label for="edit_nama" class="form-label">Nama Cabang</label>
+                        <label for="title" class="form-label">Title</label>
                         <input type="text"
                             class="form-control form-control-sm"
-                            id="edit_nama"
-                            name="edit_nama"
+                            id="title"
+                            name="title"
+                            maxlength="50"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="link" class="form-label">Link</label>
+                        <input type="text"
+                            class="form-control form-control-sm"
+                            id="link"
+                            name="link"
+                            maxlength="100"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="icon" class="form-label">Icon</label>
+                        <input type="text"
+                            class="form-control form-control-sm"
+                            id="icon"
+                            name="icon"
+                            maxlength="30"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="set_active" class="form-label">Set Active</label>
+                        <input type="text"
+                            class="form-control form-control-sm"
+                            id="set_active"
+                            name="set_active"
                             maxlength="30"
                             required>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button class="btn btn-primary btn-spinner-edit" disabled style="width: 130px; display: none;">
+                    <button class="btn btn-primary btn-spinner d-none" disabled style="width: 130px;">
                         <span class="spinner-grow spinner-grow-sm"></span>
                         Loading...
                     </button>
-                    <button type="submit" class="btn btn-primary btn-edit-save" style="width: 130px;">
-                        <i class="fas fa-save"></i> Simpan
+                    <button type="submit" class="btn btn-primary btn-save" style="width: 130px;">
+                        <i class="fas fa-save"></i> <span class="modal-btn"> Simpan </span>
                     </button>
                 </div>
             </form>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
 
 {{-- modal delete --}}
@@ -228,7 +217,11 @@
         $("#example1").DataTable();
     });
     $(document).ready(function () {
-        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
         var Toast = Swal.mixin({
             toast: true,
@@ -238,28 +231,27 @@
         });
 
         $('#btn-create').on('click', function() {
-            $('.modal-create').modal('show');
+            $('.modal-form').modal('show');
         });
 
-        $(document).on('shown.bs.modal', '.modal-create', function() {
-            $('#create_nama').focus();
+        $(document).on('shown.bs.modal', '.modal-form', function() {
+            $('#nama').focus();
         });
 
-        $('#form-create').submit(function (e) {
+        $(document).on('submit', '.form-create', function (e) {
             e.preventDefault();
 
-            var formData = {
-                nama: $('#create_nama').val(),
-                _token: CSRF_TOKEN
-            }
+            var formData = new FormData($('#form')[0]);
 
             $.ajax({
-                url: '{{ URL::route('cabang.store') }}',
+                url: "{{ URL::route('nav_main.store') }}",
                 type: 'POST',
                 data: formData,
+                contentType: false,
+                processData: false,
                 beforeSend: function () {
-                    $('.btn-spinner-create').css('display', 'inline-block');
-                    $('.btn-create-save').css('display', 'none');
+                    $('.btn-spinner').removeClass('d-none');
+                    $('.btn-save').addClass('d-none');
                 },
                 success: function (response) {
                     Toast.fire({
@@ -272,10 +264,10 @@
                     }, 1000);
                 },
                 error: function(xhr, status, error) {
-                    var errorMessage = xhr.status + ': ' + statusText
+                    var errorMessage = xhr.status + ': ' + error
 
                     Toast.fire({
-                        icon: 'danger',
+                        icon: 'error',
                         title: 'Error - ' + errorMessage
                     });
                 }
@@ -285,14 +277,15 @@
         // edit
         $('body').on('click', '.btn-edit', function (e) {
             e.preventDefault();
+            $('.modal-title').empty();
+            $('.modal-btn').empty();
 
             var id = $(this).attr('data-id');
-            var url = '{{ route("cabang.edit", ":id") }}';
+            var url = '{{ route("nav_main.edit", ":id") }}';
             url = url.replace(':id', id);
 
             var formData = {
-                id: id,
-                _token: CSRF_TOKEN
+                id: id
             }
 
             $.ajax({
@@ -300,33 +293,36 @@
                 type: 'GET',
                 data: formData,
                 success: function (response) {
-                    $('#edit_id').val(response.id);
-                    $('#edit_nama').val(response.nama);
+                    $('#form').removeClass('form-create');
+                    $('#form').addClass('form-edit');
+                    $('.modal-title').append("Ubah Data Navigasi Main")
+                    $('.modal-btn').append("Perbaharui");
 
-                    $('.modal-edit').modal('show');
+                    $('#id').val(response.nav_main.id);
+                    $('#title').val(response.nav_main.title);
+                    $('#link').val(response.nav_main.link);
+                    $('#icon').val(response.nav_main.icon);
+                    $('#set_active').val(response.nav_main.set_active);
+
+                    $('.modal-form').modal('show');
                 }
             })
         });
 
-        $('#form-edit').submit(function (e) {
+        $(document).on('submit', '.form-edit', function (e) {
             e.preventDefault();
 
-            var formData = {
-                nama: $('#edit_nama').val(),
-                _token: CSRF_TOKEN
-            }
-
-            var id = $('#edit_id').val();
-            var url = '{{ route("cabang.update", ":id") }}';
-            url = url.replace(':id', id);
+            var formData = new FormData($('#form')[0]);
 
             $.ajax({
-                url: url,
-                type: 'PUT',
+                url: "{{ URL::route('nav_main.update') }}",
+                type: 'POST',
                 data: formData,
+                contentType: false,
+                processData: false,
                 beforeSend: function () {
-                    $('.btn-spinner-edit').css("display", "block");
-                    $('.btn-edit-save').css("display", "none");
+                    $('.btn-spinner').removeClass("d-none");
+                    $('.btn-save').addClass("d-none");
                 },
                 success: function (response) {
                     Toast.fire({
@@ -339,7 +335,7 @@
                     }, 1000);
                 },
                 error: function(xhr, status, error) {
-                    var errorMessage = xhr.status + ': ' + xhar.statusText
+                    var errorMessage = xhr.status + ': ' + error
 
                     Toast.fire({
                         icon: 'error',
@@ -354,12 +350,11 @@
             e.preventDefault();
 
             var id = $(this).attr('data-id');
-            var url = '{{ route("cabang.delete_btn", ":id") }}';
+            var url = '{{ route("nav_main.delete_btn", ":id") }}';
             url = url.replace(':id', id);
 
             var formData = {
-                id: id,
-                _token: CSRF_TOKEN
+                id: id
             }
 
             $.ajax({
@@ -377,12 +372,11 @@
             e.preventDefault();
 
             var formData = {
-                id: $('#delete_id').val(),
-                _token: CSRF_TOKEN
+                id: $('#delete_id').val()
             }
 
             $.ajax({
-                url: '{{ URL::route('cabang.delete') }}',
+                url: '{{ URL::route('nav_main.delete') }}',
                 type: 'POST',
                 data: formData,
                 beforeSend: function () {
@@ -400,7 +394,7 @@
                     }, 1000);
                 },
                 error: function(xhr, status, error) {
-                    var errorMessage = xhr.status + ': ' + xhar.statusText
+                    var errorMessage = xhr.status + ': ' + error
 
                     Toast.fire({
                         icon: 'error',

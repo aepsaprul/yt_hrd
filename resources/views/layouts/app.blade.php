@@ -123,6 +123,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('nav_main.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-paper-plane text-center mr-2" style="width: 30px"></i>
+                                <p>Nav Main</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('nav_sub.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-paper-plane text-center mr-2" style="width: 30px"></i>
+                                <p>Nav Sub</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('cabang.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-sitemap text-center mr-2" style="width: 30px"></i>
                                 <p>Cabang</p>
