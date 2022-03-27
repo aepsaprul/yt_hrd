@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class CutiApprover extends Model
 {
     use HasFactory;
 
-    public function approveCuti() {
-        return $this->hasMany(CutiApprover::class, 'role_id', 'id');
+    public function role() {
+        return $this->belongsTo(Role::class, 'role_id', 'id');
     }
 }

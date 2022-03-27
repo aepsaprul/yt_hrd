@@ -33,6 +33,7 @@ class CreateKaryawansTable extends Migration
             $table->integer('cabang_id')->nullable();
             $table->integer('divisi_id')->nullable();
             $table->integer('jabatan_id')->nullable();
+            $table->integer('role_id')->nullable();
             $table->date('tanggal_masuk')->nullable();
             $table->date('tanggal_keluar')->nullable();
             $table->text('alasan_keluar')->nullable();

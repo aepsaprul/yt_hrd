@@ -51,6 +51,7 @@
                                         <th class="text-center text-indigo">Nama</th>
                                         <th class="text-center text-indigo">Telepon</th>
                                         <th class="text-center text-indigo">Email</th>
+                                        <th class="text-center text-indigo">Jabatan</th>
                                         <th class="text-center text-indigo">Status</th>
                                         <th class="text-center text-indigo">Aksi</th>
                                     </tr>
@@ -62,6 +63,7 @@
                                             <td>{{ $item->nama_lengkap }}</td>
                                             <td>{{ $item->telepon }}</td>
                                             <td>{{ $item->email }}</td>
+                                            <td>{{ $item->jabatan->nama }}</td>
                                             <td class="text-center">
                                                 <div class="custom-control custom-switch custom-switch-on-success">
                                                     <input
