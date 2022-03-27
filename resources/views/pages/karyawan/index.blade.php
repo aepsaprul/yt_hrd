@@ -288,6 +288,15 @@
                                                 <small id="errorDivisiId" class="form-text text-danger"></small>
                                             </div>
                                         </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label for="role_id">Role</label>
+                                                <select name="role_id" id="role_id" class="form-control form-control-sm" >
+
+                                                </select>
+                                                <small id="errorRoleId" class="form-text text-danger"></small>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -447,6 +456,12 @@
                     });
                     $('#divisi_id').append(value_divisi);
 
+                    var value_role = "<option value=\"\">--Pilih Role--</option>";
+                    $.each(response.roles, function (index, value) {
+                         value_role += "<option value=\"" + value.id + "\">" + value.nama + "</option>";
+                    });
+                    $('#role_id').append(value_role);
+
                     $('.modal-form').modal('show');
                 }
             });
@@ -477,6 +492,7 @@
             $('#errorCabangId').empty();
             $('#errorJabatanId').empty();
             $('#errorDivisiId').empty();
+            $('#errorRoleId').empty();
             $('#errorTanggalMasuk').empty();
             $('#errorFoto').empty();
 
@@ -512,6 +528,7 @@
                         $('#errorCabangId').append(response.errors.cabang_id);
                         $('#errorJabatanId').append(response.errors.jabatan_id);
                         $('#errorDivisiId').append(response.errors.divisi_id);
+                        $('#errorRoleId').append(response.errors.role_id);
                         $('#errorTanggalMasuk').append(response.errors.tanggal_masuk);
                         $('#errorFoto').append(response.errors.foto);
 
@@ -611,6 +628,12 @@
                          value_divisi += "<option value=\"" + value.id + "\""; if (value.id == response.divisi_id) { value_divisi += " selected"; } value_divisi += ">" + value.nama + "</option>";
                     });
                     $('#divisi_id').append(value_divisi);
+
+                    let value_role = "";
+                    $.each(response.roles, function (index, value) {
+                         value_role += "<option value=\"" + value.id + "\""; if (value.id == response.role_id) { value_role += " selected"; } value_role += ">" + value.nama + "</option>";
+                    });
+                    $('#role_id').append(value_role);
 
                     $('.profile_img img').prop("src", "{{ URL::to('') }}" + "/image/" + response.foto);
 

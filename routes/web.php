@@ -7,6 +7,7 @@ use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\NavMainController;
 use App\Http\Controllers\NavSubController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +48,16 @@ Route::middleware(['auth'])->group(function () {
         Route::post('master/nav_sub/update', [NavSubController::class, 'update'])->name('nav_sub.update');
         Route::get('master/nav_sub/{id}/delete_btn', [NavSubController::class, 'deleteBtn'])->name('nav_sub.delete_btn');
         Route::post('master/nav_sub/delete', [NavSubController::class, 'delete'])->name('nav_sub.delete');
+
+        // user
+        Route::get('master/user', [UserController::class, 'index'])->name('user.index');
+        Route::get('master/user/create', [UserController::class, 'create'])->name('user.create');
+        Route::post('master/user/store', [UserController::class, 'store'])->name('user.store');
+        Route::get('master/user/{id}/delete_btn', [UserController::class, 'deleteBtn'])->name('user.delete_btn');
+        Route::post('master/user/delete', [UserController::class, 'delete'])->name('user.delete');
+        Route::get('master/user/{id}/access', [UserController::class, 'access'])->name('user.access');
+        Route::put('master/user/{id}/access_save', [UserController::class, 'accessSave'])->name('user.access_save');
+        Route::post('master/user/sync', [UserController::class, 'sync'])->name('user.sync');
 
     // cabang
     Route::get('cabang', [CabangController::class, 'index'])->name('cabang.index');

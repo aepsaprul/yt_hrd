@@ -137,6 +137,11 @@
                                         <i class="fas fa-angle-right nav-icon"></i><p>Nav Sub</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('master/user') ? 'active' : '' }}">
+                                        <i class="fas fa-angle-right nav-icon"></i><p>User</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">

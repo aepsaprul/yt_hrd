@@ -16,4 +16,12 @@ class Karyawan extends Model
     public function cabang() {
         return $this->belongsTo(Cabang::class, 'cabang_id', 'id');
     }
+
+    public function navAccess() {
+        return $this->hasMany(NavAccess::class, 'user_id', 'id');
+    }
+
+    public function role() {
+        return $this->belongsTo(Role::class, 'role_id', 'id');
+    }
 }
