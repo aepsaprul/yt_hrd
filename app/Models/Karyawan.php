@@ -17,6 +17,10 @@ class Karyawan extends Model
         return $this->belongsTo(Cabang::class, 'cabang_id', 'id');
     }
 
+    public function divisi() {
+        return $this->belongsTo(Divisi::class, 'divisi_id', 'id');
+    }
+
     public function navAccess() {
         return $this->hasMany(NavAccess::class, 'karyawan_id', 'id');
     }

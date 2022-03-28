@@ -11,6 +11,7 @@ use App\Http\Controllers\NavMainController;
 use App\Http\Controllers\NavSubController;
 use App\Http\Controllers\PengajuanCutiController;
 use App\Http\Controllers\PengajuanResignController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResignApprovalController;
 use App\Http\Controllers\ResignApproverController;
 use App\Http\Controllers\ResignController;
@@ -39,6 +40,10 @@ Auth::routes([
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 
 Route::middleware(['auth'])->group(function () {
+    // profile
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('profile/store', [ProfileController::class, 'store'])->name('profile.store');
+
     // master
         // nav main
         Route::get('master/nav_main', [NavMainController::class, 'index'])->name('nav_main.index');

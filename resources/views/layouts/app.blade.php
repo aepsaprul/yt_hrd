@@ -61,8 +61,14 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         <a
                             class="dropdown-item main-btn-edit"
-                            href="#">
+                            href="{{ route('profile.index') }}">
                                 <i class="fa fa-id-card px-2"></i> Profil
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a
+                            class="dropdown-item main-btn-edit"
+                            href="#">
+                                <i class="fa fa-lock-open px-2"></i> Ubah Password
                         </a>
                         <div class="dropdown-divider"></div>
                         <a
@@ -94,7 +100,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="{{ asset('assets/user.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{ asset('image/' . Auth::user()->karyawan->foto) }}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
                     <a href="#" class="d-block">{{ Auth::user()->name }}</a>
