@@ -179,11 +179,15 @@
                                 <p>Karyawan</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('cuti.index') }}" class="nav-link {{ request()->is(['cuti', 'cuti/*']) ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-mug-hot text-center mr-2" style="width: 30px"></i>
+                                <p>Data Cuti</p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
-                <!-- /.sidebar-menu -->
             </div>
-            <!-- /.sidebar -->
         </aside>
 
         @yield('content')

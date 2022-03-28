@@ -5,16 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Karyawan;
 use App\Models\NavAccess;
 use App\Models\NavSub;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index()
     {
         $nav_access = NavAccess::with('karyawan')
-            ->select(DB::raw('count(*) as nav_access_count, user_id'))
-            ->groupBy('user_id')
+            ->select(DB::raw('count(*) as nav_access_count, karyawan_id'))
+            ->groupBy('karyawan_id')
             ->orderBy('id', 'desc')
             ->get();
 
@@ -35,16 +37,25 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $karyawan = Karyawan::find($request->karyawan_id);
+
         $nav_sub = NavSub::get();
 
         foreach ($nav_sub as $key => $item) {
             $nav_access = new NavAccess;
-            $nav_access->user_id = $request->karyawan_id;
+            $nav_access->karyawan_id = $request->karyawan_id;
             $nav_access->main_id = $item->main_id;
             $nav_access->sub_id = $item->id;
             $nav_access->tampil = "n";
             $nav_access->save();
         }
+
+        $user = new User;
+        $user->karyawan_id = $karyawan->id;
+        $user->name = $karyawan->nama_lengkap;
+        $user->email = $karyawan->email;
+        $user->password = Hash::make("12345");
+        $user->save();
 
         return response()->json([
             'status' => 'true'
@@ -53,7 +64,7 @@ class UserController extends Controller
 
     public function delete(Request $request)
     {
-        $nav_access = NavAccess::where('user_id', $request->id);
+        $nav_access = NavAccess::where('karyawan_id', $request->id);
         $nav_access->delete();
 
         return response()->json([
@@ -64,9 +75,9 @@ class UserController extends Controller
     public function access($id)
     {
         $karyawan = Karyawan::where('id', $id)->first();
-        $menu = NavAccess::with('navSub')->where('user_id', $id)->get();
+        $menu = NavAccess::with('navSub')->where('karyawan_id', $id)->get();
         $sub = NavAccess::with('navMain')
-            ->where('user_id', $id)
+            ->where('karyawan_id', $id)
             ->select(DB::raw('count(main_id) as total'),'main_id')
             ->groupBy('main_id')
             ->get();
@@ -75,9 +86,9 @@ class UserController extends Controller
             ->select('nav_subs.id AS nav_sub_id', 'nav_subs.title AS title', 'nav_subs.main_id AS nav_main')
             ->leftJoin('nav_accesses', function($join) use ($id) {
                 $join->on('nav_subs.id', '=', 'nav_accesses.sub_id')
-                    ->where('nav_accesses.user_id', '=', $id);
+                    ->where('nav_accesses.karyawan_id', '=', $id);
             })
-            ->whereNull('user_id')
+            ->whereNull('karyawan_id')
             ->get();
 
         // return view('pages.master.user.access', [
@@ -118,14 +129,14 @@ class UserController extends Controller
             ->select('nav_subs.id AS nav_sub_id', 'nav_subs.title AS title', 'nav_subs.main_id AS nav_main')
             ->leftJoin('nav_accesses', function($join) use ($karyawan_id) {
                 $join->on('nav_subs.id', '=', 'nav_accesses.sub_id')
-                    ->where('nav_accesses.user_id', '=', $karyawan_id);
+                    ->where('nav_accesses.karyawan_id', '=', $karyawan_id);
             })
-            ->whereNull('user_id')
+            ->whereNull('karyawan_id')
             ->get();
 
         foreach ($sync as $key => $item) {
             $nav_access = new NavAccess;
-            $nav_access->user_id = $karyawan->id;
+            $nav_access->karyawan_id = $karyawan->id;
             $nav_access->main_id = $item->nav_main;
             $nav_access->sub_id = $item->nav_sub_id;
             $nav_access->tampil = "n";

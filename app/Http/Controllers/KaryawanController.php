@@ -7,6 +7,7 @@ use App\Models\Divisi;
 use App\Models\Jabatan;
 use App\Models\Karyawan;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -186,6 +187,11 @@ class KaryawanController extends Controller
 
         $karyawan->save();
 
+        $user = User::where('karyawan_id', $request->id);
+        $user->name = $karyawan->nama_lengkap;
+        $user->email = $karyawan->email;
+        $user->save();
+
         return response()->json([
             'status' => 'true'
         ]);
@@ -207,6 +213,9 @@ class KaryawanController extends Controller
         if (file_exists(public_path("image/" . $karyawan->foto))) {
             File::delete(public_path("image/" . $karyawan->foto));
         }
+
+        $user = User::where('karyawan_id', $karyawan->id);
+        $user->delete();
 
         $karyawan->delete();
 

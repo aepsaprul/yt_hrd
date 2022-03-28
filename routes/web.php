@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CabangController;
 use App\Http\Controllers\CutiApproverController;
+use App\Http\Controllers\CutiController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KaryawanController;
@@ -113,4 +114,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('karyawan/{id}/delete_btn', [KaryawanController::class, 'deleteBtn'])->name('karyawan.delete_btn');
     Route::post('karyawan/delete', [KaryawanController::class, 'delete'])->name('karyawan.delete');
     Route::post('karyawan/status', [KaryawanController::class, 'status'])->name('karyawan.status');
+
+    // data cuti
+    Route::get('cuti', [CutiController::class, 'index'])->name('cuti.index');
+    Route::get('cuti/show', [CutiController::class, 'show'])->name('cuti.show');
+    Route::get('cuti/{id}/delete_btn', [CutiController::class, 'deleteBtn'])->name('cuti.delete_btn');
+    Route::post('cuti/delete', [CutiController::class, 'delete'])->name('cuti.delete');
 });

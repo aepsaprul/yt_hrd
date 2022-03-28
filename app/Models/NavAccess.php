@@ -10,7 +10,7 @@ class NavAccess extends Model
     use HasFactory;
 
     public function karyawan() {
-        return $this->belongsTo(Karyawan::class, 'user_id', 'id');
+        return $this->belongsTo(Karyawan::class, 'karyawan_id', 'id');
     }
 
     public function navMain() {

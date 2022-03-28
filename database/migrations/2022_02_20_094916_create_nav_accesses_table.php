@@ -15,7 +15,7 @@ class CreateNavAccessesTable extends Migration
     {
         Schema::create('nav_accesses', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->nullable();
+            $table->integer('karyawan_id')->nullable();
             $table->integer('main_id')->nullable();
             $table->integer('sub_id')->nullable();
             $table->char('tampil', 1)->nullable();
