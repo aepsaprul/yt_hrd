@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CabangController;
+use App\Http\Controllers\CutiApprovalController;
 use App\Http\Controllers\CutiApproverController;
 use App\Http\Controllers\CutiController;
 use App\Http\Controllers\DivisiController;
@@ -8,6 +9,11 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\NavMainController;
 use App\Http\Controllers\NavSubController;
+use App\Http\Controllers\PengajuanCutiController;
+use App\Http\Controllers\PengajuanResignController;
+use App\Http\Controllers\ResignApprovalController;
+use App\Http\Controllers\ResignApproverController;
+use App\Http\Controllers\ResignController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -73,6 +79,18 @@ Route::middleware(['auth'])->group(function () {
         Route::get('master/cuti_approver/{id}/delete_btn_approver', [CutiApproverController::class, 'deleteBtnApprover'])->name('cuti_approver.delete_btn_approver');
         Route::post('master/cuti_approver/delete_approver', [CutiApproverController::class, 'deleteApprover'])->name('cuti_approver.delete_approver');
 
+        // resign approver
+        Route::get('master/resign_approver', [ResignApproverController::class, 'index'])->name('resign_approver.index');
+        Route::get('master/resign_approver/get_resign', [ResignApproverController::class, 'getresign'])->name('resign_approver.get_resign');
+        Route::get('master/resign_approver/create', [ResignApproverController::class, 'create'])->name('resign_approver.create');
+        Route::post('master/resign_approver/store', [ResignApproverController::class, 'store'])->name('resign_approver.store');
+        Route::post('master/resign_approver/update_approver', [ResignApproverController::class, 'updateApprover'])->name('resign_approver.update_approver');
+        Route::post('master/resign_approver/add_approver', [ResignApproverController::class, 'addApprover'])->name('resign_approver.add_approver');
+        Route::get('master/resign_approver/{id}/delete_btn', [ResignApproverController::class, 'deleteBtn'])->name('resign_approver.delete_btn');
+        Route::post('master/resign_approver/delete', [ResignApproverController::class, 'delete'])->name('resign_approver.delete');
+        Route::get('master/resign_approver/{id}/delete_btn_approver', [ResignApproverController::class, 'deleteBtnApprover'])->name('resign_approver.delete_btn_approver');
+        Route::post('master/resign_approver/delete_approver', [ResignApproverController::class, 'deleteApprover'])->name('resign_approver.delete_approver');
+
     // cabang
     Route::get('cabang', [CabangController::class, 'index'])->name('cabang.index');
     Route::post('cabang/store', [CabangController::class, 'store'])->name('cabang.store');
@@ -120,4 +138,32 @@ Route::middleware(['auth'])->group(function () {
     Route::get('cuti/show', [CutiController::class, 'show'])->name('cuti.show');
     Route::get('cuti/{id}/delete_btn', [CutiController::class, 'deleteBtn'])->name('cuti.delete_btn');
     Route::post('cuti/delete', [CutiController::class, 'delete'])->name('cuti.delete');
+
+    // approval cuti
+    Route::get('cuti_approval', [CutiApprovalController::class, 'index'])->name('cuti_approval.index');
+    Route::get('cuti_approval/{id}/show', [CutiApprovalController::class, 'show'])->name('cuti_approval.show');
+    Route::get('cuti_approval/{id}/approved', [CutiApprovalController::class, 'approved'])->name('cuti_approval.approved');
+    Route::get('cuti_approval/{id}/disapproved', [CutiApprovalController::class, 'disapproved'])->name('cuti_approval.disapproved');
+
+    // data resign
+    Route::get('resign', [ResignController::class, 'index'])->name('resign.index');
+    Route::get('resign/{id}/show', [ResignController::class, 'show'])->name('resign.show');
+    Route::get('resign/{id}/delete_btn', [ResignController::class, 'deleteBtn'])->name('resign.delete_btn');
+    Route::post('resign/delete', [ResignController::class, 'delete'])->name('resign.delete');
+
+    // approval resign
+    Route::get('resign_approval', [ResignApprovalController::class, 'index'])->name('resign_approval.index');
+    Route::get('resign_approval/{id}/show', [ResignApprovalController::class, 'show'])->name('resign_approval.show');
+    Route::get('resign_approval/{id}/approved', [ResignApprovalController::class, 'approved'])->name('resign_approval.approved');
+    Route::get('resign_approval/{id}/disapproved', [ResignApprovalController::class, 'disapproved'])->name('resign_approval.disapproved');
+
+    // pengajuan cuti
+    Route::get('pengajuan/cuti', [PengajuanCutiController::class, 'index'])->name('pengajuan_cuti.index');
+    Route::get('pengajuan/cuti/create', [PengajuanCutiController::class, 'create'])->name('pengajuan_cuti.create');
+    Route::post('pengajuan/cuti/store', [PengajuanCutiController::class, 'store'])->name('pengajuan_cuti.store');
+
+    // pengajuan resign
+    Route::get('pengajuan/resign', [PengajuanResignController::class, 'index'])->name('pengajuan_resign.index');
+    Route::get('pengajuan/resign/create', [PengajuanResignController::class, 'create'])->name('pengajuan_resign.create');
+    Route::post('pengajuan/resign/store', [PengajuanResignController::class, 'store'])->name('pengajuan_resign.store');
 });

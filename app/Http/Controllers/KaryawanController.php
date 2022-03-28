@@ -146,7 +146,8 @@ class KaryawanController extends Controller
             'status_karyawan' => $karyawan->status_karyawan,
             'jabatans' => $jabatan,
             'cabangs' => $cabang,
-            'divisis' => $divisi
+            'divisis' => $divisi,
+            'roles' => $role
         ]);
     }
 

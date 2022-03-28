@@ -155,35 +155,10 @@
                             </tr>
                         </thead>
                         <tbody id="data-access">
-                            {{-- @foreach ($subs as $key => $item)
-                                <tr>
-                                    <td rowspan="{{ $item->total }}">{{ $item->navMain->title }}</td>
-                                    @foreach ($menus as $item_menu)
-                                        @if ($item_menu->main_id == $item->main_id)
-                                                <td>
-                                                    @if ($item_menu->navSub->link != '#')
-                                                        {{ $item_menu->navSub->title }}
-                                                    @endif
-                                                </td>
-                                                <td class="text-center">
-                                                    <input type="checkbox" name="index[]" id="index_{{ $item_menu->id }}" data-id="{{ $item_menu->id }}" value="{{ $item_menu->tampil }}" {{ $item_menu->tampil == "y" ? 'checked' : '' }}>
-                                                </td>
-                                            </tr>
-                                        @endif
-                                    @endforeach
-                            @endforeach --}}
+                            {{-- data di jquery --}}
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button class="btn btn-primary btn-spinner d-none" disabled style="width: 130px;">
-                    <span class="spinner-grow spinner-grow-sm"></span>
-                    Loading...
-                </button>
-                <button type="submit" class="btn btn-primary btn-save" style="width: 130px;">
-                    <i class="fas fa-save"></i> <span class="modal-btn"> Simpan </span>
-                </button>
             </div>
         </div>
     </div>

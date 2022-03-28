@@ -566,6 +566,12 @@
 
             $('.modal-btn').empty();
             $('#foto').empty();
+            $('#agama').empty();
+            $('#gender').empty();
+            $('#cabang_id').empty();
+            $('#jabatan_id').empty();
+            $('#divisi_id').empty();
+            $('#role_id').empty();
 
             var id = $(this).attr('data-id');
             var url = "{{ route('karyawan.edit', ':id') }}";

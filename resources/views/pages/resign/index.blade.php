@@ -18,12 +18,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Data Cuti</h1>
+                    <h1>Data Resign</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Data Cuti</li>
+                        <li class="breadcrumb-item active">Data Resign</li>
                     </ol>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($cutis as $key => $item)
+                                    @foreach ($resigns as $key => $item)
                                         <tr>
                                             <td class="text-center">{{ $key + 1 }}</td>
                                             <td>{{ $item->karyawan->nama_lengkap }}</td>
@@ -116,41 +116,31 @@
     </section>
 </div>
 
-<div class="modal fade modal-form" id="modal-default">
+{{-- modal detail --}}
+<div class="modal fade modal-detail" id="modal-default">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="form" class="form-create">
-                <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data Role</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+            <div class="modal-header">
+                <h4 class="modal-title">Detail Pengajuan Resign</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="nama" class="form-label">Nama</label>
+                    <input type="hidden" name="karyawan_id" id="karyawan_id">
+                    <input type="text" class="form-control" id="nama" name="nama" maxlength="30" readonly>
                 </div>
-                <div class="modal-body">
-
-                    {{-- id --}}
-                    <input type="hidden" name="id" id="id">
-
-                    <div class="mb-3">
-                        <label for="nama" class="form-label">Nama Role</label>
-                        <input type="text"
-                            class="form-control form-control-sm"
-                            id="nama"
-                            name="nama"
-                            maxlength="30"
-                            required>
-                    </div>
+                <div class="mb-3">
+                    <label for="tanggal_keluar" class="form-label">Tanggal Keluar</label>
+                    <input type="date" class="form-control" id="tanggal_keluar" name="tanggal_keluar" readonly>
                 </div>
-                <div class="modal-footer justify-content-between">
-                    <button class="btn btn-primary btn-spinner d-none" disabled style="width: 130px;">
-                        <span class="spinner-grow spinner-grow-sm"></span>
-                        Loading...
-                    </button>
-                    <button type="submit" class="btn btn-primary btn-save" style="width: 130px;">
-                        <i class="fas fa-save"></i> <span class="modal-btn"> Simpan </span>
-                    </button>
+                <div class="mb-3">
+                    <label for="alasan" class="form-label">Alasan</label>
+                    <textarea name="alasan" id="alasan" class="form-control" cols="30" rows="3" readonly></textarea>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
@@ -215,58 +205,13 @@
             timer: 3000
         });
 
-        $('#btn-create').on('click', function() {
-            $('.modal-form').modal('show');
-        });
-
-        $(document).on('shown.bs.modal', '.modal-form', function() {
-            $('#nama').focus();
-        });
-
-        $(document).on('submit', '.form-create', function (e) {
+        // detail
+        $(document).on('click', '.btn-detail', function (e) {
             e.preventDefault();
-
-            var formData = new FormData($('#form')[0]);
-
-            $.ajax({
-                url: '{{ URL::route('role.store') }}',
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                beforeSend: function () {
-                    $('.btn-spinner').removeClass('d-none');
-                    $('.btn-save').addClass('d-none');
-                },
-                success: function (response) {
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Data behasil ditambah'
-                    });
-
-                    setTimeout(() => {
-                        window.location.reload(1);
-                    }, 1000);
-                },
-                error: function(xhr, status, error) {
-                    var errorMessage = xhr.status + ': ' + error
-
-                    Toast.fire({
-                        icon: 'danger',
-                        title: 'Error - ' + errorMessage
-                    });
-                }
-            });
-        });
-
-        // edit
-        $('body').on('click', '.btn-edit', function (e) {
-            e.preventDefault();
-            $('.modal-title').empty();
-            $('.modal-btn').empty();
+            $('#form_tanggal').empty();
 
             var id = $(this).attr('data-id');
-            var url = '{{ route("role.edit", ":id") }}';
+            var url = '{{ route("resign.show", ":id") }}';
             url = url.replace(':id', id);
 
             var formData = {
@@ -278,51 +223,11 @@
                 type: 'GET',
                 data: formData,
                 success: function (response) {
-                    $('#form').removeClass('form-create');
-                    $('#form').addClass('form-edit');
-                    $('.modal-title').append("Ubah Data Role")
-                    $('.modal-btn').append("Perbaharui");
+                    $('#nama').val(response.resign.karyawan.nama_lengkap);
+                    $('#tanggal_keluar').val(response.resign.tanggal_keluar);
+                    $('#alasan').val(response.resign.alasan);
 
-                    $('#id').val(response.role.id);
-                    $('#nama').val(response.role.nama);
-
-                    $('.modal-form').modal('show');
-                }
-            })
-        });
-
-        $(document).on('submit', '.form-edit', function (e) {
-            e.preventDefault();
-
-            var formData = new FormData($('#form')[0]);
-
-            $.ajax({
-                url: "{{ URL::route('role.update') }}",
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                beforeSend: function () {
-                    $('.btn-spinner').removeClass("d-none");
-                    $('.btn-save').addClass("d-none");
-                },
-                success: function (response) {
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Data berhasil diperbaharui'
-                    });
-
-                    setTimeout( () => {
-                        window.location.reload(1);
-                    }, 1000);
-                },
-                error: function(xhr, status, error) {
-                    var errorMessage = xhr.status + ': ' + error
-
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'Error - ' + errorMessage
-                    });
+                    $('.modal-detail').modal('show');
                 }
             });
         });
@@ -332,7 +237,7 @@
             e.preventDefault();
 
             var id = $(this).attr('data-id');
-            var url = '{{ route("role.delete_btn", ":id") }}';
+            var url = '{{ route("resign.delete_btn", ":id") }}';
             url = url.replace(':id', id);
 
             var formData = {
@@ -358,7 +263,7 @@
             }
 
             $.ajax({
-                url: '{{ URL::route('role.delete') }}',
+                url: '{{ URL::route('resign.delete') }}',
                 type: 'POST',
                 data: formData,
                 beforeSend: function () {

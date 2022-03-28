@@ -12,4 +12,8 @@ class Role extends Model
     public function approveCuti() {
         return $this->hasMany(CutiApprover::class, 'role_id', 'id');
     }
+
+    public function approveResign() {
+        return $this->hasMany(ResignApprover::class, 'role_id', 'id');
+    }
 }

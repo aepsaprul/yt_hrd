@@ -23,7 +23,7 @@
 
     @yield('style')
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
         <!-- Preloader -->
@@ -116,75 +116,144 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <li class="nav-item">
-                            <a href="{{ route('home.index') }}" class="nav-link {{ request()->is(['home', 'home/*']) ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-tachometer-alt text-center mr-2" style="width: 30px"></i>
-                                <p>Dashboard</p>
-                            </a>
-                        </li>
-                        <li class="nav-item {{ request()->is('master/*') ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ request()->is('master/*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-database text-center mr-2" style="width: 30px;"></i><p>Master<i class="right fas fa-angle-left"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('nav_main.index') }}" class="nav-link {{ request()->is('master/nav_main') ? 'active' : '' }}">
-                                        <i class="fas fa-angle-right nav-icon"></i><p>Nav Main</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('nav_sub.index') }}" class="nav-link {{ request()->is('master/nav_sub') ? 'active' : '' }}">
-                                        <i class="fas fa-angle-right nav-icon"></i><p>Nav Sub</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('master/user') ? 'active' : '' }}">
-                                        <i class="fas fa-angle-right nav-icon"></i><p>User</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('cuti_approver.index') }}" class="nav-link {{ request()->is('master/cuti_approver') ? 'active' : '' }}">
-                                        <i class="fas fa-angle-right nav-icon"></i><p>Cuti Approver</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('cabang.index') }}" class="nav-link {{ request()->is(['cabang', 'cabang/*']) ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-sitemap text-center mr-2" style="width: 30px"></i>
-                                <p>Cabang</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('divisi.index') }}" class="nav-link {{ request()->is(['divisi', 'divisi/*']) ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-user-friends text-center mr-2" style="width: 30px"></i>
-                                <p>Divisi</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('jabatan.index') }}" class="nav-link {{ request()->is(['jabatan', 'jabatan/*']) ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-id-card text-center mr-2" style="width: 30px"></i>
-                                <p>Jabatan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('role.index') }}" class="nav-link {{ request()->is(['role', 'role/*']) ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-address-book text-center mr-2" style="width: 30px"></i>
-                                <p>Role</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('karyawan.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-user-tie text-center mr-2" style="width: 30px"></i>
-                                <p>Karyawan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('cuti.index') }}" class="nav-link {{ request()->is(['cuti', 'cuti/*']) ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-mug-hot text-center mr-2" style="width: 30px"></i>
-                                <p>Data Cuti</p>
-                            </a>
-                        </li>
+                        @if (Auth::user()->karyawan_id == null)
+                            <li class="nav-item">
+                                <a href="{{ route('home.index') }}" class="nav-link {{ request()->is(['home', 'home/*']) ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-tachometer-alt text-center mr-2" style="width: 30px"></i>
+                                    <p>Dashboard</p>
+                                </a>
+                            </li>
+                            <li class="nav-item {{ request()->is('master/*') ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link {{ request()->is('master/*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-database text-center mr-2" style="width: 30px;"></i><p>Master<i class="right fas fa-angle-left"></i></p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('nav_main.index') }}" class="nav-link {{ request()->is('master/nav_main') ? 'active' : '' }}">
+                                            <i class="fas fa-angle-right nav-icon"></i><p>Nav Main</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('nav_sub.index') }}" class="nav-link {{ request()->is('master/nav_sub') ? 'active' : '' }}">
+                                            <i class="fas fa-angle-right nav-icon"></i><p>Nav Sub</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('master/user') ? 'active' : '' }}">
+                                            <i class="fas fa-angle-right nav-icon"></i><p>User</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('cuti_approver.index') }}" class="nav-link {{ request()->is('master/cuti_approver') ? 'active' : '' }}">
+                                            <i class="fas fa-angle-right nav-icon"></i><p>Cuti Approver</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('resign_approver.index') }}" class="nav-link {{ request()->is('master/resign_approver') ? 'active' : '' }}">
+                                            <i class="fas fa-angle-right nav-icon"></i><p>Resign Approver</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('cabang.index') }}" class="nav-link {{ request()->is(['cabang', 'cabang/*']) ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-sitemap text-center mr-2" style="width: 30px"></i>
+                                    <p>Cabang</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('divisi.index') }}" class="nav-link {{ request()->is(['divisi', 'divisi/*']) ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-user-friends text-center mr-2" style="width: 30px"></i>
+                                    <p>Divisi</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('jabatan.index') }}" class="nav-link {{ request()->is(['jabatan', 'jabatan/*']) ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-id-card text-center mr-2" style="width: 30px"></i>
+                                    <p>Jabatan</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('role.index') }}" class="nav-link {{ request()->is(['role', 'role/*']) ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-address-book text-center mr-2" style="width: 30px"></i>
+                                    <p>Role</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('karyawan.index') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-user-tie text-center mr-2" style="width: 30px"></i>
+                                    <p>Karyawan</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('cuti.index') }}" class="nav-link {{ request()->is(['cuti', 'cuti/*']) ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-mug-hot text-center mr-2" style="width: 30px"></i>
+                                    <p>Data Cuti</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('cuti_approval.index') }}" class="nav-link {{ request()->is(['cuti_approval', 'cuti_approval/*']) ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-check text-center mr-2" style="width: 30px"></i>
+                                    <p>Approval Cuti</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-handshake text-center mr-2" style="width: 30px"></i>
+                                    <p>Data Resign</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-check text-center mr-2" style="width: 30px"></i>
+                                    <p>Approval Resign</p>
+                                </a>
+                            </li>
+                            <li class="nav-item {{ request()->is('pengajuan/*') ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link {{ request()->is('pengajuan/*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-book text-center mr-2" style="width: 30px;"></i><p>Pengajuan<i class="right fas fa-angle-left"></i></p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link {{ request()->is('pengajuan/cuti') ? 'active' : '' }}">
+                                            <i class="fas fa-angle-right nav-icon"></i><p>Cuti</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link {{ request()->is('pengajuan/cuti') ? 'active' : '' }}">
+                                            <i class="fas fa-angle-right nav-icon"></i><p>Resign</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @else
+                            @foreach ($current_nav_mains as $item)
+                                @if ($item->link == '#')
+                                    <li class="nav-item {{ request()->is(''.$item->set_active.'/*') ? 'menu-open' : '' }}">
+                                        <a href="#" class="nav-link {{ request()->is(''.$item->set_active.'/*') ? 'active' : '' }}">
+                                            <i class="nav-icon {{ $item->icon }} text-center mr-2" style="width: 30px;"></i> <p>{{ $item->title }}<i class="right fas fa-angle-left"></i></p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            @foreach ($current_menus as $item_menu)
+                                                @if ($item_menu->main_id == $item->id)
+                                                    <li class="nav-item">
+                                                        <a href="{{ route($item_menu->navSub->link) }}" class="nav-link {{ request()->is([''.$item_menu->navSub->set_active.'', ''.$item_menu->navSub->set_active.'/*']) ? 'active' : '' }}">
+                                                            <i class="fas fa-angle-right nav-icon"></i> <p>{{ $item_menu->navSub->title }}</p>
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a href="{{ route($item->link) }}" class="nav-link {{ request()->is([''.$item->set_active.'', ''.$item->set_active.'/*']) ? 'active' : '' }}">
+                                            <i class="nav-icon {{ $item->icon }} text-center mr-2" style="width: 30px;"></i> <p>{{ $item->title }}</p>
+                                        </a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        @endif
                     </ul>
                 </nav>
             </div>
