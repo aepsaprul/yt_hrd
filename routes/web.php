@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\CabangController;
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\CutiApprovalController;
 use App\Http\Controllers\CutiApproverController;
 use App\Http\Controllers\CutiController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KaryawanController;
@@ -43,6 +45,13 @@ Route::middleware(['auth'])->group(function () {
     // profile
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('profile/store', [ProfileController::class, 'store'])->name('profile.store');
+
+    // ubah password
+    Route::get('change_password', [ChangePasswordController::class, 'index'])->name('change_password.index');
+    Route::post('change_password/store', [ChangePasswordController::class, 'store'])->name('change_password.store');
+
+    // dashboard
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
     // master
         // nav main

@@ -67,7 +67,7 @@
                         <div class="dropdown-divider"></div>
                         <a
                             class="dropdown-item main-btn-edit"
-                            href="#">
+                            href="{{ route('change_password.index') }}">
                                 <i class="fa fa-lock-open px-2"></i> Ubah Password
                         </a>
                         <div class="dropdown-divider"></div>
@@ -100,7 +100,11 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="{{ asset('image/' . Auth::user()->karyawan->foto) }}" class="img-circle elevation-2" alt="User Image">
+                    @if (Auth::user()->karyawan)
+                        <img src="{{ asset('image/' . Auth::user()->karyawan->foto) }}" class="img-circle elevation-2" alt="User Image">
+                    @else
+                        <img src="{{ asset('assets/user.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                    @endif
                 </div>
                 <div class="info">
                     <a href="#" class="d-block">{{ Auth::user()->name }}</a>
