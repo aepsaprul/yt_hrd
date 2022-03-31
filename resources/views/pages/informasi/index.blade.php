@@ -18,16 +18,16 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Cabang</h1>
+                    <h1>Informasi</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Cabang</li>
+                        <li class="breadcrumb-item active">Informasi</li>
                     </ol>
                 </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
 
     <!-- Main content -->
@@ -49,15 +49,19 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center text-indigo">No</th>
-                                        <th class="text-center text-indigo">Nama Cabang</th>
+                                        <th class="text-center text-indigo">Judul</th>
+                                        <th class="text-center text-indigo">Dokumen</th>
                                         <th class="text-center text-indigo">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($cabangs as $key => $item)
+                                    @foreach ($informasis as $key => $item)
                                         <tr>
                                             <td class="text-center">{{ $key + 1 }}</td>
-                                            <td>{{ $item->nama }}</td>
+                                            <td>{{ $item->title }}</td>
+                                            <td class="text-center">
+                                                <a href="{{ asset('file/' . $item->document) }}" target="_blank">{{ $item->document }}</a>
+                                            </td>
                                             <td class="text-center">
                                                 <div class="btn-group">
                                                     <a
@@ -97,70 +101,40 @@
 </div>
 <!-- /.content-wrapper -->
 
-<div class="modal fade modal-create" id="modal-default">
+{{-- modal create & edit --}}
+<div class="modal fade modal-form" id="modal-default">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="form-create">
+            <form id="form" method="POST" enctype="multipart/form-data" class="form-create">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data Cabang</h4>
+                    <h4 class="modal-title">Tambah Data Informasi</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="create_nama" class="form-label">Nama Cabang</label>
-                        <input type="text"
-                            class="form-control form-control-sm"
-                            id="create_nama"
-                            name="create_nama"
-                            maxlength="30"
-                            required>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button class="btn btn-primary btn-spinner-create" disabled style="width: 130px; display: none;">
-                        <span class="spinner-grow spinner-grow-sm"></span>
-                        Loading...
-                    </button>
-                    <button type="submit" class="btn btn-primary btn-create-save" style="width: 130px;">
-                        <i class="fas fa-save"></i> Simpan
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
-<div class="modal fade modal-edit" id="modal-default">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form id="form-edit">
-                <input type="hidden" id="edit_id" name="edit_id">
-                <div class="modal-header">
-                    <h4 class="modal-title">Ubah Data Cabang</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+                    {{-- id --}}
+                    <input type="hidden" id="id" name="id">
+
                     <div class="mb-3">
-                        <label for="edit_nama" class="form-label">Nama Cabang</label>
-                        <input type="text"
-                            class="form-control form-control-sm"
-                            id="edit_nama"
-                            name="edit_nama"
-                            maxlength="30"
-                            required>
+                        <label for="title" class="form-label">Judul</label>
+                        <input type="text" name="title" id="title" class="form-control" required>
+                        <small id="error_title" class="form-text text-danger"></small>
+                    </div>
+                    <div class="mb-3 document">
+                        <label for="document" class="form-label">Documen</label>
+                        <input type="file" name="document" id="document" class="form-control">
+                        <small id="error_document" class="form-text text-danger"></small>
                     </div>
                 </div>
-                <div class="modal-footer justify-content-between">
-                    <button class="btn btn-primary btn-spinner-edit" disabled style="width: 130px; display: none;">
+                <div class="modal-footer footer-form justify-content-between">
+                    <button class="btn btn-primary btn-spinner d-none" disabled style="width: 130px;">
                         <span class="spinner-grow spinner-grow-sm"></span>
                         Loading...
                     </button>
-                    <button type="submit" class="btn btn-primary btn-edit-save" style="width: 130px;">
-                        <i class="fas fa-save"></i> Simpan
+                    <button type="submit" class="btn btn-primary btn-save" style="width: 130px;">
+                        <i class="fas fa-save"></i> <span class="modal-btn">Simpan</span>
                     </button>
                 </div>
             </form>
@@ -179,7 +153,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button class="btn btn-danger" type="button" data-dismiss="modal" style="width: 130px;"><span aria-hidden="true">Tidak</span></button>
-                    <button class="btn btn-primary btn-delete-spinner" disabled style="width: 130px; display: none;">
+                    <button class="btn btn-primary btn-delete-spinner d-none" disabled style="width: 130px">
                         <span class="spinner-grow spinner-grow-sm"></span>
                         Loading...
                     </button>
@@ -189,9 +163,7 @@
                 </div>
             </form>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
 
 @endsection
@@ -217,7 +189,11 @@
         $("#example1").DataTable();
     });
     $(document).ready(function () {
-        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
         var Toast = Swal.mixin({
             toast: true,
@@ -226,42 +202,54 @@
             timer: 3000
         });
 
-        $('#btn-create').on('click', function() {
-            $('.modal-create').modal('show');
-        });
-
-        $(document).on('shown.bs.modal', '.modal-create', function() {
-            $('#create_nama').focus();
-        });
-
-        $('#form-create').submit(function (e) {
+        // create
+        $('#btn-create').on('click', function(e) {
             e.preventDefault();
 
-            var formData = {
-                nama: $('#create_nama').val(),
-                _token: CSRF_TOKEN
-            }
+            $('.modal-form').modal('show');
+        });
+
+        $(document).on('shown.bs.modal', '.modal-form', function() {
+            $('#kategori').focus();
+        });
+
+        $(document).on('submit', '.form-create', function (e) {
+            e.preventDefault();
+
+            let formData = new FormData($('#form')[0]);
 
             $.ajax({
-                url: '{{ URL::route('cabang.store') }}',
+                url: "{{ URL::route('informasi.store') }}",
                 type: 'POST',
                 data: formData,
+                contentType: false,
+                processData: false,
                 beforeSend: function () {
-                    $('.btn-spinner-create').css('display', 'inline-block');
-                    $('.btn-create-save').css('display', 'none');
+                    $('.btn-spinner').removeClass('d-none');
+                    $('.btn-save').addClass('d-none');
                 },
                 success: function (response) {
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Data behasil ditambah'
-                    });
+                    if (response.status == 400) {
+                        $('#error_title').append(response.errors.title);
+                        $('#error_document').append(response.errors.document);
 
-                    setTimeout(() => {
-                        window.location.reload(1);
-                    }, 1000);
+                        setTimeout(() => {
+                            $('.btn-spinner').addClass('d-none');
+                            $('.btn-save').removeClass('d-none');
+                        }, 1000);
+                    } else {
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Data behasil ditambah'
+                        });
+
+                        setTimeout(() => {
+                            window.location.reload(1);
+                        }, 1000);
+                    }
                 },
                 error: function(xhr, status, error) {
-                    var errorMessage = xhr.status + ': ' + statusText
+                    var errorMessage = xhr.status + ': ' + error
 
                     Toast.fire({
                         icon: 'danger',
@@ -274,14 +262,15 @@
         // edit
         $('body').on('click', '.btn-edit', function (e) {
             e.preventDefault();
+            $('.modal-title').empty();
+            $('.modal-btn').empty();
 
             var id = $(this).attr('data-id');
-            var url = '{{ route("cabang.edit", ":id") }}';
+            var url = '{{ route("informasi.edit", ":id") }}';
             url = url.replace(':id', id);
 
             var formData = {
-                id: id,
-                _token: CSRF_TOKEN
+                id: id
             }
 
             $.ajax({
@@ -289,33 +278,37 @@
                 type: 'GET',
                 data: formData,
                 success: function (response) {
-                    $('#edit_id').val(response.id);
-                    $('#edit_nama').val(response.nama);
+                    $('#form').removeClass('form-create');
+                    $('#form').addClass('form-edit');
+                    $('.modal-title').append("Edit Data Informasi");
+                    $('.modal-btn').append("Perbaharui");
 
-                    $('.modal-edit').modal('show');
+                    $('#title').prop("disabled", false);
+
+                    $('.footer-form').removeClass("d-none");
+
+                    $('#id').val(response.informasi.id);
+                    $('#title').val(response.informasi.title);
+
+                    $('.modal-form').modal('show');
                 }
             })
         });
 
-        $('#form-edit').submit(function (e) {
+        $(document).on('submit', '.form-edit', function (e) {
             e.preventDefault();
 
-            var formData = {
-                nama: $('#edit_nama').val(),
-                _token: CSRF_TOKEN
-            }
-
-            var id = $('#edit_id').val();
-            var url = '{{ route("cabang.update", ":id") }}';
-            url = url.replace(':id', id);
+            let formData = new FormData($('#form')[0]);
 
             $.ajax({
-                url: url,
-                type: 'PUT',
+                url: "{{ URL::route('informasi.update') }}",
+                type: 'POST',
                 data: formData,
+                contentType: false,
+                processData: false,
                 beforeSend: function () {
-                    $('.btn-spinner-edit').css("display", "block");
-                    $('.btn-edit-save').css("display", "none");
+                    $('.btn-spinner').removeClass("d-none");
+                    $('.btn-save').addClass("d-none");
                 },
                 success: function (response) {
                     Toast.fire({
@@ -328,7 +321,7 @@
                     }, 1000);
                 },
                 error: function(xhr, status, error) {
-                    var errorMessage = xhr.status + ': ' + xhar.statusText
+                    var errorMessage = xhr.status + ': ' + error
 
                     Toast.fire({
                         icon: 'error',
@@ -343,12 +336,11 @@
             e.preventDefault();
 
             var id = $(this).attr('data-id');
-            var url = '{{ route("cabang.delete_btn", ":id") }}';
+            var url = '{{ route("informasi.delete_btn", ":id") }}';
             url = url.replace(':id', id);
 
             var formData = {
-                id: id,
-                _token: CSRF_TOKEN
+                id: id
             }
 
             $.ajax({
@@ -362,21 +354,20 @@
             });
         });
 
-        $('#form-delete').submit(function (e) {
+        $(document).on('submit', '#form-delete', function (e) {
             e.preventDefault();
 
             var formData = {
-                id: $('#delete_id').val(),
-                _token: CSRF_TOKEN
+                id: $('#delete_id').val()
             }
 
             $.ajax({
-                url: '{{ URL::route('cabang.delete') }}',
+                url: "{{ URL::route('informasi.delete') }}",
                 type: 'POST',
                 data: formData,
                 beforeSend: function () {
-                    $('.btn-delete-spinner').css('display', 'block');
-                    $('.btn-delete-yes').css('display', 'none');
+                    $('.btn-delete-spinner').removeClass('d-none');
+                    $('.btn-delete-yes').addClass('d-none');
                 },
                 success: function (response) {
                     Toast.fire({
@@ -389,7 +380,7 @@
                     }, 1000);
                 },
                 error: function(xhr, status, error) {
-                    var errorMessage = xhr.status + ': ' + xhar.statusText
+                    var errorMessage = xhr.status + ': ' + error
 
                     Toast.fire({
                         icon: 'error',

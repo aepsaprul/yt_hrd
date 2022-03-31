@@ -99,28 +99,28 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    @if (Auth::user()->karyawan)
-                        <img src="{{ asset('image/' . Auth::user()->karyawan->foto) }}" class="img-circle elevation-2" alt="User Image">
-                    @else
-                        <img src="{{ asset('assets/user.jpg') }}" class="img-circle elevation-2" alt="User Image">
-                    @endif
-                </div>
-                <div class="info">
-                    <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-                </div>
+                    <div class="image">
+                        @if (Auth::user()->karyawan)
+                            <img src="{{ asset('image/' . Auth::user()->karyawan->foto) }}" class="img-circle elevation-2" alt="User Image">
+                        @else
+                            <img src="{{ asset('assets/user.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                        @endif
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                    </div>
                 </div>
 
                 <!-- SidebarSearch Form -->
                 <div class="form-inline">
-                <div class="input-group" data-widget="sidebar-search">
-                    <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
+                    <div class="input-group" data-widget="sidebar-search">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-sidebar">
+                                <i class="fas fa-search fa-fw"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 </div>
 
                 <!-- Sidebar Menu -->
@@ -128,7 +128,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         @if (Auth::user()->karyawan_id == null)
                             <li class="nav-item">
-                                <a href="{{ route('home.index') }}" class="nav-link {{ request()->is(['home', 'home/*']) ? 'active' : '' }}">
+                                <a href="{{ route('dashboard.index') }}" class="nav-link {{ request()->is(['dashboard', 'dashboard/*']) ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-tachometer-alt text-center mr-2" style="width: 30px"></i>
                                     <p>Dashboard</p>
                                 </a>
@@ -190,7 +190,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('karyawan.index') }}" class="nav-link">
+                                <a href="{{ route('karyawan.index') }}" class="nav-link {{ request()->is(['karyawan', 'karyawan/*']) ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-user-tie text-center mr-2" style="width: 30px"></i>
                                     <p>Karyawan</p>
                                 </a>
@@ -208,13 +208,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ route('resign.index') }}" class="nav-link {{ request()->is(['resign', 'resign/*']) ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-handshake text-center mr-2" style="width: 30px"></i>
                                     <p>Data Resign</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ route('resign_approval.index') }}" class="nav-link {{ request()->is(['resign_approval', 'resign_approval/*']) ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-check text-center mr-2" style="width: 30px"></i>
                                     <p>Approval Resign</p>
                                 </a>
@@ -225,16 +225,22 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link {{ request()->is('pengajuan/cuti') ? 'active' : '' }}">
+                                        <a href="{{ route('pengajuan_cuti.index') }}" class="nav-link {{ request()->is('pengajuan/cuti') ? 'active' : '' }}">
                                             <i class="fas fa-angle-right nav-icon"></i><p>Cuti</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link {{ request()->is('pengajuan/cuti') ? 'active' : '' }}">
+                                        <a href="{{ route('pengajuan_resign.index') }}" class="nav-link {{ request()->is('pengajuan/resign') ? 'active' : '' }}">
                                             <i class="fas fa-angle-right nav-icon"></i><p>Resign</p>
                                         </a>
                                     </li>
                                 </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('informasi.index') }}" class="nav-link {{ request()->is(['informasi', 'informasi/*']) ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-info-circle text-center mr-2" style="width: 30px"></i>
+                                    <p>Informasi</p>
+                                </a>
                             </li>
                         @else
                             @foreach ($current_nav_mains as $item)

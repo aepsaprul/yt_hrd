@@ -7,6 +7,7 @@ use App\Http\Controllers\CutiApproverController;
 use App\Http\Controllers\CutiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DivisiController;
+use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\NavMainController;
@@ -180,4 +181,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('pengajuan/resign', [PengajuanResignController::class, 'index'])->name('pengajuan_resign.index');
     Route::get('pengajuan/resign/create', [PengajuanResignController::class, 'create'])->name('pengajuan_resign.create');
     Route::post('pengajuan/resign/store', [PengajuanResignController::class, 'store'])->name('pengajuan_resign.store');
+
+    // informasi
+    Route::get('informasi', [InformasiController::class, 'index'])->name('informasi.index');
+    Route::post('informasi/store', [InformasiController::class, 'store'])->name('informasi.store');
+    Route::get('informasi/{id}/edit', [InformasiController::class, 'edit'])->name('informasi.edit');
+    Route::post('informasi/update', [InformasiController::class, 'update'])->name('informasi.update');
+    Route::get('informasi/{id}/delete_btn', [InformasiController::class, 'deleteBtn'])->name('informasi.delete_btn');
+    Route::post('informasi/delete', [InformasiController::class, 'delete'])->name('informasi.delete');
 });
