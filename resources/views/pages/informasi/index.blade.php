@@ -51,6 +51,7 @@
                                         <th class="text-center text-indigo">No</th>
                                         <th class="text-center text-indigo">Judul</th>
                                         <th class="text-center text-indigo">Dokumen</th>
+                                        <th class="text-center text-indigo">Publish</th>
                                         <th class="text-center text-indigo">Aksi</th>
                                     </tr>
                                 </thead>
@@ -61,6 +62,9 @@
                                             <td>{{ $item->title }}</td>
                                             <td class="text-center">
                                                 <a href="{{ asset('file/' . $item->document) }}" target="_blank">{{ $item->document }}</a>
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="checkbox" name="publish[]" id="publish_{{ $item->id }}" data-id="{{ $item->id }}" value="{{ $item->publish }}" {{ $item->publish == "y" ? 'checked' : '' }}>
                                             </td>
                                             <td class="text-center">
                                                 <div class="btn-group">
@@ -385,6 +389,40 @@
                     Toast.fire({
                         icon: 'error',
                         title: 'Error - ' + errorMessage
+                    });
+                }
+            });
+        });
+
+        // publish
+        $('input[name="publish[]"]').on('change', function() {
+            var id = $(this).attr('data-id');
+            var formData;
+
+            var id = $(this).attr('data-id');
+            var url = '{{ route("informasi.publish_save", ":id") }}';
+            url = url.replace(':id', id );
+
+            if($('#publish_' + id).is(":checked")) {
+                formData = {
+                    id: id,
+                    publish: "y"
+                }
+            } else {
+                formData = {
+                    id: id,
+                    publish: "n"
+                }
+            }
+
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: formData,
+                success: function(response) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Data berhasil disimpan.'
                     });
                 }
             });

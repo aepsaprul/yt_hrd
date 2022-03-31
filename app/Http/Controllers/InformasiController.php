@@ -31,6 +31,7 @@ class InformasiController extends Controller
         } else {
             $informasi = new Informasi;
             $informasi->title = $request->title;
+            $informasi->publish = 'y';
 
             if($request->hasFile('document')) {
                 $file = $request->file('document');
@@ -102,6 +103,17 @@ class InformasiController extends Controller
 
         return response()->json([
             'status' => 'true'
+        ]);
+    }
+
+    public function publishSave(Request $request, $id)
+    {
+        $informasi = Informasi::find($id);
+        $informasi->publish = $request->publish;
+        $informasi->save();
+
+        return response()->json([
+            'status' => 'success'
         ]);
     }
 }

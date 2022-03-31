@@ -189,4 +189,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('informasi/update', [InformasiController::class, 'update'])->name('informasi.update');
     Route::get('informasi/{id}/delete_btn', [InformasiController::class, 'deleteBtn'])->name('informasi.delete_btn');
     Route::post('informasi/delete', [InformasiController::class, 'delete'])->name('informasi.delete');
+    Route::put('informasi/{id}/publish_save', [InformasiController::class, 'publishSave'])->name('informasi.publish_save');
 });
